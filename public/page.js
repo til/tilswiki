@@ -63,7 +63,6 @@ $(function() {
   //$('div').each(function() {
   //  $(this).appendAfter()
   //});
+  $('#wysiwyg').wysiwyg();
 
-  $('div').addClass('unbound');
-  bindDefaultEvents();
 });

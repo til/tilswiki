@@ -10,6 +10,7 @@ public = Proc.new do |env|
           "js"  => "text/javascript",
           "css" => "text/css",
           "png" => "image/png",
+          "gif" => "image/gif",
         }[extension]},
       File.read(file)
     ]
