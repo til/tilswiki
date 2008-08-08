@@ -1,0 +1,78 @@
+div {
+  margin: 0;
+}
+
+div.element {
+  position: relative;
+}
+div.element img {
+  visibility: hidden;
+  width: 100%;
+  height: 30px;
+  cursor: move;
+}
+
+div.edit {
+  border: 3px solid #0075b4;
+  border-top: none;
+}
+div.edit img {
+  visibility: visible;
+}
+
+textarea {
+  margin: 1em;
+  width: 95%;
+}
+
+p {
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+div form.delete {
+  visibility: hidden;
+  position: absolute;
+  right: 0px;
+  top: 5px;
+}
+
+div.element form.delete button {
+  height: 20px;
+  font-weight: bold;
+  padding: 0;
+}
+
+div.element.edit form.delete {
+  visibility: visible;
+}
+
+div.spacer {
+  width: 100%;
+  height: 20px;
+  position: relative;
+}
+
+div.spacer p {
+  visibility: hidden;
+  background: lightgrey;
+  font-weight: bold;
+  text-align: center;
+  color: white;
+}
+
+div.spacer.active p {
+  visibility: visible;
+}
+
+hr.footer {
+  color: lightgrey;
+}
+
+p.footer, p.footer a {
+  font-size: 0.8em;
+  color: lightgrey;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
