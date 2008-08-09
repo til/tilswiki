@@ -2,37 +2,10 @@
 <script src="/page.js" type="text/javascript"></script>
 <% end %>
 
-<textarea id="wysiwyg">
+<% form_tag do %>
+<input type="hidden" name="_method" value="put" />
 
-<h1>A page</h1>
+<textarea id="wysiwyg" name="content"><%= @content -%></textarea>
 
-
-<p>guykawasaki Don't let the title fool you, this is a good book about
-parenting: http://bit.ly/xFTM5 The White Trash Mom Handbook by
-  Michelle Lamar 14 minutes ago from TweetDeck</p>
-
-<p>
-<img src="http://images.slashdot.org/topics/topicmedicine.gif" />
-
-There are more than 33 million people living with HIV worldwide. No
-cure or vaccine has been unveiled this week in Mexico during the
-International AIDS Conference. Still, European researchers have
-developed 'a predictive software system for HIV that could help extend
-the lives of victims of the killer disease.' The scientists working on
-the EuResist project have combined HIV databases in Italy, Sweden and
-Germany, creating what is probably the largest database on AIDS and
-HIV in the world. Armed with information about more than 18,000
-patients, 64,000 therapies, and 240,000 viral mode measurements, the
-researchers have created new mathematical prediction models, which
-should soon be available to medical researchers and doctors all over
-  the world.</p>
-
-</textarea>
-
-
-
-
-
-
-<hr class="footer" />
-<p class="footer">Powered by <a href="/">tilswiki</a></p>
+<%= submit_button 'Save' %>
+<% end %>

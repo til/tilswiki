@@ -5,10 +5,31 @@ class Index < Merb::Controller
   end
 
   def index
-    render :layout => "application"
+    render
+  end
+end
+
+class Pages < Merb::Controller
+
+  def show
+    @content = File.read(path(params[:page]))
+    
+    render :template => 'page'
+    
+  rescue Errno::ENOENT
+    render "Not found", :status => 404, :format => :text
   end
   
-  def page
-    render
+  def update
+    File.open(path(params[:page]), 'w') do |file|
+      file.puts params[:content]
+    end
+    
+    render "Updated"
+  end
+  
+protected
+  def path(page)
+    Merb.dir_for(:public) / "pages" / page
   end
 end

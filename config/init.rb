@@ -1,7 +1,10 @@
 # Move this to application.rb if you want it to be reloadable in dev mode.
 Merb::Router.prepare do |r|
   r.match('/').to(:controller => 'Index', :action =>'index')
-  r.match('/page').to(:controller => 'Index', :action =>'page')
+
+  r.match('/:page', :method => 'get').to(:controller => 'Pages', :action => 'show')
+  r.match('/:page', :method => 'put').to(:controller => 'Pages', :action => 'update')
+
   r.default_routes
 end
 
