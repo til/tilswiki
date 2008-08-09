@@ -63,6 +63,6 @@ $(function() {
   //$('div').each(function() {
   //  $(this).appendAfter()
   //});
-  $('#wysiwyg').wysiwyg();
+  $('#wysiwyg').wysiwyg({ css: '/master.css' });
 
 });

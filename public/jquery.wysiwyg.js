@@ -367,7 +367,7 @@
 
             $(element)
             // .css('display', 'none')
-            .hide()
+            //.hide()
             .before(this.element);
 
             this.viewHTML = false;
@@ -562,7 +562,7 @@
                     if ( control.visible !== false )
                         this.appendMenuSeparator();
                 }
-                else if ( control.visible )
+                else if ( 1 || control.visible )
                 {
                     this.appendMenu(
                         control.command || name, control.arguments || [],

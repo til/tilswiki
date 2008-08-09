@@ -5,6 +5,7 @@ textarea {
 }
 
 img {
+  border: 3px solid green;
   float: right;
 }
 
