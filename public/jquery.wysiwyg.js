@@ -446,7 +446,7 @@
                 /**
                  * @link http://code.google.com/p/jwysiwyg/issues/detail?id=11
                  */
-                $(this.editorDoc).keydown(function() { self.saveContent(); })
+                $(this.editorDoc).keyup(function() { self.saveContent(); })
                                  .mousedown(function() { self.saveContent(); });
             }
 
