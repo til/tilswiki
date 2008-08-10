@@ -561,7 +561,7 @@
                     if ( control.visible !== false )
                         this.appendMenuSeparator();
                 }
-                else if ( 1 || control.visible )
+                else if ( control.visible )
                 {
                     this.appendMenu(
                         control.command || name, control.arguments || [],

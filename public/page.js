@@ -5,7 +5,7 @@ function putContent() {
   progressSaving();
   $.ajax({
            url:     '/' + document.location.toString().split('/').pop(),
-           data:    { content: $('textarea').val() },
+           data:    { content: $('#wysiwyg').html() },
            type:    'PUT',
            'success': function(data, textStatus) {
              progressSaved();
@@ -15,11 +15,10 @@ function putContent() {
 
 function putContentIfIdle() {
 
-  var wysiwyg = $('#wysiwyg').data('wysiwyg');
+  var last_changed_time = $('#wysiwyg').data('last_changed_time');
 
-  if (wysiwyg.last_changed_time &&
-      (new Date()).getTime() > wysiwyg.last_changed_time + 1 * 1000) {
-    delete(wysiwyg.last_changed_time);
+  if (last_changed_time && (new Date()).getTime() > last_changed_time + 1 * 1000) {
+    $('#wysiwyg').removeData('last_changed_time');
     putContent();
   }
 
@@ -27,6 +26,7 @@ function putContentIfIdle() {
 }
 
 function progressUnsaved() {
+  $('#wysiwyg').data('last_changed_time', (new Date()).getTime());
   $('.progress').html('unsaved changes');
 }
 
@@ -45,19 +45,32 @@ function progressSaved() {
 
 $(function() {
 
-  $('#wysiwyg').wysiwyg({ css: '/master.css' });
+  $('#wysiwyg').keyup(progressUnsaved);
 
-  var wysiwyg = $('#wysiwyg').data('wysiwyg');
+  $.each(
+    ['bold', 'italic', 'insertHorizontalRule',
+     'increaseFontSize', 'decreaseFontSize'],
+    function() {
+      var cmd = this.toString();
+      $('.panel a.' + cmd).mousedown(function() {
+        document.execCommand(cmd, false, []);
+        return false;
+      });
+    }
+  );
 
-  wysiwyg.saveContentWithoutPut = wysiwyg.saveContent;
-
-  wysiwyg.saveContent = function() {
-    this.last_changed_time = (new Date()).getTime();
-    progressUnsaved();
-
-    this.saveContentWithoutPut();
-  }
+  // Bind heading commands. To support non-firefox, this should
+  // call "formatBlock Heading 1" instead
+  $.each(
+    ['h1', 'h2', 'h3'],
+    function() {
+      var cmd = this.toString();
+      $('.panel a.' + cmd).mousedown(function() {
+        document.execCommand('heading', false, cmd);
+        return false;
+      });
+    }
+  );
 
   putContentIfIdle();
-
 });

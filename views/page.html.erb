@@ -6,44 +6,19 @@
 <ul class="panel">
 <li><a class="bold"><!-- --></a></li>
 <li><a class="italic"><!-- --></a></li>
-<li><a class="strikeThrough"><!-- --></a></li>
-<li><a class="underline"><!-- --></a></li>
-<li><a class="justifyLeft"><!-- --></a></li>
-<li><a class="justifyCenter"><!-- --></a></li>
-<li><a class="justifyRight"><!-- --></a></li>
-<li><a class="justifyFull"><!-- --></a></li>
-<li><a class="indent"><!-- --></a></li>
-<li><a class="outdent"><!-- --></a></li>
-<li><a class="subscript"><!-- --></a></li>
-<li><a class="superscript"><!-- --></a></li>
-<li><a class="undo"><!-- --></a></li>
-<li><a class="redo"><!-- --></a></li>
-<li><a class="insertOrderedList"><!-- --></a></li>
-<li><a class="insertUnorderedList"><!-- --></a></li>
+
 <li><a class="insertHorizontalRule"><!-- --></a></li>
-<li><a class="createLink"><!-- --></a></li>
-<li><a class="insertImage"><!-- --></a></li>
+
 <li><a class="h1"><!-- --></a></li>
 <li><a class="h2"><!-- --></a></li>
 <li><a class="h3"><!-- --></a></li>
-<li><a class="h1"><!-- --></a></li>
-<li><a class="h2"><!-- --></a></li>
-<li><a class="h3"><!-- --></a></li>
-<li><a class="cut"><!-- --></a></li>
-<li><a class="copy"><!-- --></a></li>
-<li><a class="paste"><!-- --></a></li>
+
 <li><a class="increaseFontSize"><!-- --></a></li>
 <li><a class="decreaseFontSize"><!-- --></a></li>
-<li><a class="html"><!-- --></a></li>
-<li><a class="removeFormat"><!-- --></a></li>
 </ul>
-
 <p class="progress"></p>
 </div>
 
-<% form_tag do %>
-<input type="hidden" name="_method" value="put" />
-
-<textarea id="wysiwyg" name="content"><%= @content -%></textarea>
-
-<% end %>
+<div id="wysiwyg" contenteditable="true">
+<%= @content -%>
+</div>
