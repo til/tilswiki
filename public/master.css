@@ -46,15 +46,16 @@ div.panel p.progress img {
 }
 
 ul.panel li { list-style-type: none; float: left; margin: 0 2px; }
-ul.panel li.separator { height: 16px; margin: 0 4px; border-left: 1px solid #ccc; }
+ul.panel li.break { clear: both; }
 ul.panel li a { opacity: 0.6; display: block; width: 16px; height: 16px; background: url('jquery.wysiwyg.gif') no-repeat -64px -80px; border: 0; cursor: pointer; padding: 1px; }
 ul.panel li a:hover, ul.panel li a.active { opacity: 0.99; }
 ul.panel li a.active { background-color: #f9f9f9; border: 1px solid #ccc; border-left-color: #AAA; border-top-color: #AAA; padding: 0; }
 
 ul.panel li a.bold { background-position: 0 -16px; }
 ul.panel li a.italic { background-position: -16px -16px; }
-ul.panel li a.strikeThrough { background-position: -32px -16px; }
-ul.panel li a.underline { background-position: -48px -16px; }
+ul.panel li a.colorRed { background-position: -48px -16px; }
+ul.panel li a.colorGreen { background-position: -64px -16px; }
+ul.panel li a.colorBlue { background-position: -80px -16px; }
 
 ul.panel li a.justifyLeft { background-position: 0 0; }
 ul.panel li a.justifyCenter { background-position: -16px 0; }

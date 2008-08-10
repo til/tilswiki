@@ -59,6 +59,19 @@ $(function() {
     }
   );
 
+  $('.panel a.colorRed').mousedown(function() {
+    document.execCommand('forecolor', false, '#ff1111');
+    return false;
+  });
+  $('.panel a.colorGreen').mousedown(function() {
+    document.execCommand('forecolor', false, '#00aa00');
+    return false;
+  });
+  $('.panel a.colorBlue').mousedown(function() {
+    document.execCommand('forecolor', false, '#1111ff');
+    return false;
+  });
+
   // Bind heading commands. To support non-firefox, this should
   // call "formatBlock Heading 1" instead
   $.each(
