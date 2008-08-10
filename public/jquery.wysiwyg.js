@@ -355,20 +355,19 @@
                 }
             }
 
-            var panel = this.panel = $('<ul></ul>').addClass('panel');
+            var panel = this.panel = $('ul.panel');
 
-            this.appendControls();
+            //this.appendControls();
             this.element = $('<div></div>').css({
                 width : ( newX > 0 ) ? ( newX ).toString() + 'px' : '100%'
             }).addClass('wysiwyg')
-              .append(panel)
+              //.append(panel)
               .append( $('<div><!-- --></div>').css({ clear : 'both' }) )
               .append(editor);
 
             $(element)
-            // .css('display', 'none')
-            //.hide()
-            .before(this.element);
+              .hide()
+              .before(this.element);
 
             this.viewHTML = false;
 

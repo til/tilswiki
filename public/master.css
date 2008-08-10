@@ -9,15 +9,13 @@ img {
   float: right;
 }
 
-hr.footer {
-  color: lightgrey;
+p.footer {
+  border-top: 1px solid lightgrey;
+  text-align: center;
+  margin: 2em;
+  padding: 0;
 }
-
 p.footer, p.footer a {
   font-size: 0.8em;
   color: lightgrey;
-  text-align: center;
-  margin: 0;
-  padding: 0;
 }
-
