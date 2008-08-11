@@ -8,7 +8,6 @@ Merb::Router.prepare do |r|
   r.default_routes
 end
 
-
 Merb::Config.use { |c|
   c[:environment]         = 'production',
   c[:framework]           = {},
