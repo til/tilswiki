@@ -1,8 +1,14 @@
 // progress gif from http://www.andrewdavidson.com/articles/spinning-wait-icons/
 // by-nc-sa licensed
 
+// A global. Brrrr!
+var wysiwyg;
+
 function putContent() {
   progressSaving();
+
+  rememberSavedContent();
+
   $.ajax({
            url:     '/' + document.location.toString().split('/').pop(),
            data:    { content: $('#wysiwyg').html() },
@@ -11,6 +17,11 @@ function putContent() {
              progressSaved();
            }
          });
+}
+
+function rememberSavedContent() {
+  var wysiwyg = $('#wysiwyg');
+  wysiwyg.data('content', wysiwyg.html());
 }
 
 function putContentIfIdle() {
@@ -55,6 +66,7 @@ function progressSaving() {
 
 function progressSaved() {
   var progress = $('.progress');
+  var childrenToFadeOut;
 
   if (
     !progress.data('unsaved_at')
@@ -62,19 +74,28 @@ function progressSaved() {
     progress.data('saving_at') > progress.data('unsaved_at')
   ) {
     progress.html('<img src="/ajax-loader-still.gif" /><span>saved</span>');
+
+    childrenToFadeOut = progress.children();
+
     setTimeout(function() {
-      progress.children().fadeOut('slow');
+      childrenToFadeOut.fadeOut('slow');
     }, 1000);
+  }
+}
+
+// Call this on all events that may have changed the content
+ function checkIfDirty() {
+  if (wysiwyg.data('content') !== wysiwyg.html()) {
+    wysiwyg.data('last_changed_time', (new Date()).getTime());
+    progressUnsaved();
   }
 }
 
 
 $(function() {
+  wysiwyg = $('#wysiwyg');
 
-  $('#wysiwyg').keyup(function() {
-    $(this).data('last_changed_time', (new Date()).getTime());
-    progressUnsaved();
-  });
+  wysiwyg.bind("keyup mouseup", checkIfDirty);
 
   $.each(
     ['bold', 'italic', 'insertHorizontalRule',
@@ -114,5 +135,8 @@ $(function() {
     }
   );
 
+  $('.panel a').mousedown(checkIfDirty);
+
+  rememberSavedContent();
   putContentIfIdle();
 });
