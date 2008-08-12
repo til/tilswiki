@@ -5,17 +5,24 @@
 var wysiwyg;
 
 function putContent() {
+  var successCallback = function(data, textStatus) {
+    // Only run the callback when no other ajax call has been started later
+    if ($('.progress').data('allowedSuccessCallback') === successCallback) {
+      progressSaved();
+    }
+  }
+
   progressSaving();
+
+  $('.progress').data('allowedSuccessCallback', successCallback);
 
   rememberSavedContent();
 
   $.ajax({
            url:     '/' + document.location.toString().split('/').pop(),
-           data:    { content: $('#wysiwyg').html() },
+           data:    { content: wysiwyg.html() },
            type:    'PUT',
-           'success': function(data, textStatus) {
-             progressSaved();
-           }
+           'success': successCallback
          });
 }
 
@@ -55,7 +62,7 @@ function putContentIfIdle() {
 function progressUnsaved() {
   $('.progress').
     data('unsaved_at', (new Date()).getTime()).
-    html('<span class="unsaved">unsaved changes</span>');
+    html('<span class="unsaved">changed</span>');
 }
 
 function progressSaving() {
