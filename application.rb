@@ -25,8 +25,8 @@ class Pages < Merb::Controller
       file.puts params[:content]
     end
     
-    # TODO useless sleep to make net waiting time more realistic
-    sleep 3
+    # Useless sleep to make net waiting time more realistic
+    #sleep 3
 
     render "Updated"
   end

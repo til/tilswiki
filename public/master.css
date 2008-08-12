@@ -44,6 +44,9 @@ div.panel p.progress img {
   border: none;
   margin-right: 3px;
 }
+div.panel .progress span.unsaved {
+  color: darkred;
+}
 
 ul.panel li { list-style-type: none; float: left; margin: 0 2px; }
 ul.panel li.break { clear: both; }

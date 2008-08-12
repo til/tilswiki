@@ -14,7 +14,6 @@ function putContent() {
 }
 
 function putContentIfIdle() {
-
   var last_changed_time = $('#wysiwyg').data('last_changed_time');
 
   if (last_changed_time && (new Date()).getTime() > last_changed_time + 1 * 1000) {
@@ -25,27 +24,57 @@ function putContentIfIdle() {
   setTimeout(putContentIfIdle, 1000);
 }
 
+/*
+ *
+ * Functions that update the progress indicator area. Consider the
+ * following sequence of events:
+ *
+ * progressUnsaved
+ * progressSaving 1
+ * progressUnsaved
+ * progressSaving 2
+ * progressSaved 1
+ * progressSaved 2
+ *
+ * The event progressSaved 1 has been obsoleted and shouldn't have an
+ * effect anymore, but TODO currently it does
+ *
+ */
+
 function progressUnsaved() {
-  $('#wysiwyg').data('last_changed_time', (new Date()).getTime());
-  $('.progress').html('unsaved changes');
+  $('.progress').
+    data('unsaved_at', (new Date()).getTime()).
+    html('<span class="unsaved">unsaved changes</span>');
 }
 
 function progressSaving() {
-  // TODO show at least for 1 sec
-  $('.progress').html('<img src="/wait16.gif" />saving...');
+  $('.progress').
+    data('saving_at', (new Date()).getTime()).
+    html('<img src="/ajax-loader.gif" /><span>saving...</span>');
 }
 
 function progressSaved() {
-  var span = $('.progress').html('<span>saved</span>').children();
-  setTimeout(function() {
-    span.fadeOut('slow');
-  }, 2000);
+  var progress = $('.progress');
+
+  if (
+    !progress.data('unsaved_at')
+  ||
+    progress.data('saving_at') > progress.data('unsaved_at')
+  ) {
+    progress.html('<img src="/ajax-loader-still.gif" /><span>saved</span>');
+    setTimeout(function() {
+      progress.children().fadeOut('slow');
+    }, 1000);
+  }
 }
 
 
 $(function() {
 
-  $('#wysiwyg').keyup(progressUnsaved);
+  $('#wysiwyg').keyup(function() {
+    $(this).data('last_changed_time', (new Date()).getTime());
+    progressUnsaved();
+  });
 
   $.each(
     ['bold', 'italic', 'insertHorizontalRule',
