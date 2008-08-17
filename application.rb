@@ -10,6 +10,12 @@ class Pages < Merb::Controller
   def show
     @content = File.read(file_path(params[:page]))
     
+    @title = if @content =~ %r{^\s*<h1>(.*?)</h1>}
+               $1.gsub(/<[^>]+>/, '')
+             else
+               params[:page]
+             end
+    
     render :template => 'page'
     
   rescue Errno::ENOENT
