@@ -88,6 +88,7 @@ function imageUploadSuccess(data) {
   console.log('uploaded href: ' + href);
   document.execCommand('insertImage', false, href);
   $('#TB_closeWindowButton').click();
+  checkIfDirty();
 }
 
 
@@ -96,7 +97,8 @@ $(function() {
 
   wysiwyg.bind("keyup mouseup", checkIfDirty);
 
-  // Preload progress indicator images
+  // Preload progress indicator images. TODO Maybe for IE it's
+  // necessary to assign the images to variables
   $('<img />').attr('src', "/ajax-loader.gif");
   $('<img />').attr('src', "/ajax-loader-still.gif");
 
