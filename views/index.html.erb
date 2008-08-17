@@ -3,6 +3,9 @@
 <% form_tag :action => '/', :method => :post do %>
   <label for="title">Title</label>
   <%= text_field :id => 'title', :name => 'title' %>
-  <%= submit_button 'Create' %>
+  <%= submit_button 'Create Page' %>
 <% end %>
 
+<ul>
+  <li><a href="/sandbox">Sandbox</a> - a demo page to try it out</li>
+</ul>
