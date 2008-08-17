@@ -43,34 +43,18 @@ function putContentIfIdle() {
 }
 
 /*
- *
- * Functions that update the progress indicator area. Consider the
- * following sequence of events:
- *
- * progressUnsaved
- * progressSaving 1
- * progressUnsaved
- * progressSaving 2
- * progressSaved 1
- * progressSaved 2
- *
- * The event progressSaved 1 has been obsoleted and shouldn't have an
- * effect anymore, but TODO currently it does
- *
+ * Functions that update the progress indicator area
  */
-
 function progressUnsaved() {
   $('.progress').
     data('unsaved_at', (new Date()).getTime()).
     html('<span class="unsaved">changed</span>');
 }
-
 function progressSaving() {
   $('.progress').
     data('saving_at', (new Date()).getTime()).
     html('<img src="/ajax-loader.gif" /><span>saving...</span>');
 }
-
 function progressSaved() {
   var progress = $('.progress');
   var childrenToFadeOut;
@@ -96,6 +80,14 @@ function progressSaved() {
     wysiwyg.data('last_changed_time', (new Date()).getTime());
     progressUnsaved();
   }
+}
+
+function imageUploadSuccess(data) {
+  console.log('imageUpload ' + data);
+  var href = $(data).filter('a.original').attr('href');
+  console.log('uploaded href: ' + href);
+  document.execCommand('insertImage', false, href);
+  $('#TB_closeWindowButton').click();
 }
 
 
@@ -143,6 +135,8 @@ $(function() {
   );
 
   $('.panel a').mousedown(checkIfDirty);
+
+  $('#imageUpload form').ajaxForm({ success: imageUploadSuccess });
 
   rememberSavedContent();
   putContentIfIdle();

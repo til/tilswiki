@@ -1,8 +1,8 @@
 <h1>TilsWiki</h1>
 
-<% form_tag do %>
-  <label>Title</label>
-  <%= text_field %>
+<% form_tag :action => '/', :method => :post do %>
+  <label for="title">Title</label>
+  <%= text_field :id => 'title', :name => 'title' %>
   <%= submit_button 'Create' %>
 <% end %>
 

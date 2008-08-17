@@ -1,9 +1,14 @@
 # Move this to application.rb if you want it to be reloadable in dev mode.
 Merb::Router.prepare do |r|
-  r.match('/').to(:controller => 'Index', :action =>'index')
+  r.match('/', :method => 'get' ).to(:controller => 'Index', :action => 'index')
+  r.match('/', :method => 'post').to(:controller => 'Pages', :action => 'create')
 
-  r.match('/:page', :method => 'get').to(:controller => 'Pages', :action => 'show')
-  r.match('/:page', :method => 'put').to(:controller => 'Pages', :action => 'update')
+  r.match('/:page', :method => 'get' ).to(:controller => 'Pages', :action => 'show')
+  r.match('/:page', :method => 'put' ).to(:controller => 'Pages', :action => 'update')
+  r.match('/:page', :method => 'post').to(:controller => 'Pages', :action => 'upload')
+
+  r.match(%r{/([^/]+)/([^/]*)$}, :method => 'get' ).
+    to(:controller => 'Assets', :action => 'show', :page => "[1]", :asset => "[2]")
 
   r.default_routes
 end

@@ -1,6 +1,10 @@
+body {
+  padding: 0.5em;
+}
+
 #wysiwyg {
   border: none;
-  min-height: 800px;
+  min-height: 600px;
   margin-right: 80px;
 }
 
@@ -99,6 +103,11 @@ ul.panel li a.html { background-position: -48px -48px; }
 ul.panel li a.removeFormat { background-position: -80px -64px; }
 
 ul.panel li a.empty { background-position: -64px -80px; }
+
+/* ----------- Image Upload Form ----------- */
+#imageUpload {
+  visibility: hidden;
+}
 
 
 /* ------------ Footer -------------- */

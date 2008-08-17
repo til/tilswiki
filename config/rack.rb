@@ -19,4 +19,4 @@ public = Proc.new do |env|
   end
 end
 
-run Rack::Cascade.new [public, Merb::Rack::Application.new]
+run Rack::Cascade.new([public, Merb::Rack::Application.new])

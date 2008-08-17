@@ -20,10 +20,25 @@
 <li><a class="decreaseFontSize" title="Decrease font size"><!-- --></a></li>
 
 <li class="break"><a class="insertHorizontalRule" title="Insert horizontal rule"><!-- --></a></li>
+
+<li class="break"><a class="insertImage thickbox" title="Insert images" 
+    href="#TB_inline?height=300&width=300&inlineId=imageUpload"><!-- --></a></li>
 </ul>
 <p class="progress"></p>
 </div>
 
 <div id="wysiwyg" contenteditable="true">
 <%= @content -%>
+</div>
+
+
+<div id="imageUpload">
+<% form_tag :action => '/' / params[:page], :method => 'POST', :enctype => 'multipart/form-data' do %>
+  <p>
+  <input type="file" name="image" />
+  </p>
+  <p>
+  <input type="submit" value="OK" />
+  </p>
+<% end -%>
 </div>
