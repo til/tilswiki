@@ -96,6 +96,10 @@ $(function() {
 
   wysiwyg.bind("keyup mouseup", checkIfDirty);
 
+  // Preload progress indicator images
+  $('<img />').attr('src', "/ajax-loader.gif");
+  $('<img />').attr('src', "/ajax-loader-still.gif");
+
   $.each(
     ['bold', 'italic', 'insertHorizontalRule',
      'increaseFontSize', 'decreaseFontSize'],
