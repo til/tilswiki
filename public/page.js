@@ -97,10 +97,9 @@ $(function() {
 
   wysiwyg.bind("keyup mouseup", checkIfDirty);
 
-  // Preload progress indicator images. TODO Maybe for IE it's
-  // necessary to assign the images to variables
-  $('<img />').attr('src', "/ajax-loader.gif");
-  $('<img />').attr('src', "/ajax-loader-still.gif");
+  // Preload progress indicator images
+  var preloaded_images = { loader: $('<img />').attr('src', "/ajax-loader.gif"),
+                           still:  $('<img />').attr('src', "/ajax-loader-still.gif") };
 
   $.each(
     ['bold', 'italic', 'insertHorizontalRule',
