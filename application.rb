@@ -8,6 +8,10 @@ end
 class Pages < Merb::Controller
 
   def show
+    if request.env['REQUEST_PATH'] =~ %r{/$}
+      redirect '/' / params[:page]
+    end
+
     @content = File.read(file_path(params[:page]))
     
     @title = if @content =~ %r{^\s*<h1>(.*?)</h1>}
