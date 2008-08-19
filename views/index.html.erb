@@ -3,6 +3,9 @@
 <% form_tag :action => '/', :method => :post do %>
   <label for="title">Title</label>
   <%= text_field :id => 'title', :name => 'title' %>
+  <br />
+  <span class="help">e.g. 'My Birthday Party'</span> 
+  <br />
   <%= submit_button 'Create Page' %>
 <% end %>
 

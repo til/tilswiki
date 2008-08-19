@@ -22,6 +22,12 @@ body {
   padding: 0;
 }
 
+
+form .help {
+  color: grey;
+  font-size: smaller;
+}
+
 /* ------------ Panel -------------- */
 
 div.panel {
