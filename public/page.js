@@ -74,8 +74,11 @@ function progressSaved() {
   }
 }
 
-// Call this on all events that may have changed the content
- function checkIfDirty() {
+// Call this whenever content may have changed
+function checkIfDirty() {
+  if (dragMode) {
+    return;
+  }
   if (wysiwyg.data('content') !== wysiwyg.html()) {
     wysiwyg.data('last_changed_time', (new Date()).getTime());
     progressUnsaved();
@@ -88,6 +91,7 @@ function imageUploadSuccess(data) {
   console.log('uploaded href: ' + href);
   document.execCommand('insertImage', false, href);
   $('#TB_closeWindowButton').click();
+  imagesDraggable();
   checkIfDirty();
 }
 
@@ -145,4 +149,14 @@ $(function() {
 
   rememberSavedContent();
   putContentIfIdle();
+
+  imagesDraggable();
+
+  // This can be used to make the offset of br elements visible, for debugging
+  //$('h1,h2,h3,br', wysiwyg).each(function() {
+  //  e = $(this);
+  //  line = $('<div class="debugLine"></div>').css('top', e.offset().top + 'px');
+  //  $('body').prepend(line);
+  //});
+
 });
