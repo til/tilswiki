@@ -46,19 +46,16 @@ class Pages < Merb::Controller
   end
 
   def upload
-    if ! File.exists?(dir_path(params[:page]))
-      FileUtils.mkdir dir_path(params[:page])
-    end
-    
-    destination_file = dir_path(params[:page]) / params[:image][:filename]
+    dir = dir_path(params[:page])
+    @images = []
 
-    FileUtils.mv(
-      params[:image][:tempfile].path,
-      destination_file
-    )
-        
-    original = headers['Location'] = (request.protocol + request.host) / "pages" / params[:page] / params[:image][:filename]
-    render "Created <a class='original' href='#{original}'>image</a>", :status => 201
+    FileUtils.mkdir(dir) unless File.exists?(dir)
+    (params[:files] || []).reject(&:blank?).each do |file|
+      FileUtils.mv(file[:tempfile].path, dir / file[:filename])
+      @images << '/' / params[:page] / file[:filename]
+    end
+
+    render :template => 'upload', :status => 201
   end
   
 protected

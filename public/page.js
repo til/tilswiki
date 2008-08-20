@@ -86,11 +86,11 @@ function checkIfDirty() {
 }
 
 function imageUploadSuccess(data) {
-  console.log('imageUpload ' + data);
-  var href = $(data).filter('a.original').attr('href');
-  console.log('uploaded href: ' + href);
-  document.execCommand('insertImage', false, href);
-  $('#TB_closeWindowButton').click();
+  $(data).find('ul.uploaded img').each(function() {
+    document.execCommand('insertImage', false, this.src);
+  });
+
+  tb_remove();
   imagesDraggable();
   checkIfDirty();
 }
@@ -145,18 +145,30 @@ $(function() {
 
   $('.panel a').mousedown(checkIfDirty);
 
-  $('#imageUpload form').ajaxForm({ success: imageUploadSuccess });
+  $('#imageUpload form').ajaxForm({ dataType: 'xml', success: imageUploadSuccess });
 
   rememberSavedContent();
   putContentIfIdle();
 
   imagesDraggable();
 
-  // This can be used to make the offset of br elements visible, for debugging
+  // This can be used to make the offset of br elements visible, for debugging the drop target
+  // algorithm
   //$('h1,h2,h3,br', wysiwyg).each(function() {
   //  e = $(this);
   //  line = $('<div class="debugLine"></div>').css('top', e.offset().top + 'px');
   //  $('body').prepend(line);
   //});
 
+  $('#imageUpload a.cancel').click(function() {
+    tb_remove();
+    return false;
+  });
+
+  $('#imageUpload p.more a').click(function() {
+    for (i = 0; i < 3; i++) {
+      $(this).parent().before('<input type="file" name="files[]" /><br />');
+    }
+    return false;
+  });
 });

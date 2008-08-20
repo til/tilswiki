@@ -36,11 +36,14 @@
 
 <div id="imageUpload">
 <% form_tag :action => '/' / params[:page], :method => 'POST', :enctype => 'multipart/form-data' do %>
-  <p>
-  <input type="file" name="image" />
+  <input type="file" name="files[]" />
+  <br />
+  <p class="more">
+    <a href="#">+ upload more</a>
   </p>
   <p>
-  <input type="submit" value="OK" />
+    <input type="submit" value="OK" />
+    <a href="#" class="cancel">Cancel</a>
   </p>
 <% end -%>
 </div>
