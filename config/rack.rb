@@ -1,22 +1,12 @@
 
-public = Proc.new do |env|
-  request = Merb::Request.new(env)
-  file = Merb.dir_for(:public) / "public" / File.split(request.path).last
-  if File.exists?(file) && File.file?(file)
-    extension = file.split('.').last
-    [
-      200,
-      { "Content-Type" => {
-          "js"  => "text/javascript",
-          "css" => "text/css",
-          "png" => "image/png",
-          "gif" => "image/gif",
-        }[extension]},
-      File.read(file)
-    ]
-  else
-    [404, {}, "Not found"]
-  end
+# use PathPrefix Middleware if :path_prefix is set in Merb::Config
+if prefix = ::Merb::Config[:path_prefix]
+  use Merb::Rack::PathPrefix, prefix
 end
 
-run Rack::Cascade.new([public, Merb::Rack::Application.new])
+# comment this out if you are running merb behind a load balancer
+# that serves static files
+use Merb::Rack::Static, Merb.dir_for(:public)
+
+# this is our main merb application
+run Merb::Rack::Application.new

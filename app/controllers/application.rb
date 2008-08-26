@@ -1,7 +1,10 @@
+class Application < Merb::Controller
+end
+
 class Index < Merb::Controller
 
   def index
-    render :template => 'index'
+    render
   end
 end
 
@@ -11,6 +14,8 @@ class Pages < Merb::Controller
     if request.env['REQUEST_PATH'] =~ %r{/$}
       redirect '/' / params[:page]
     end
+
+    Image.new
 
     @content = File.read(file_path(params[:page]))
     
