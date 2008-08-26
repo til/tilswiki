@@ -15,8 +15,6 @@ class Pages < Merb::Controller
       redirect '/' / params[:page]
     end
 
-    Image.new
-
     @content = File.read(file_path(params[:page]))
     
     @title = if @content =~ %r{^\s*<h1>(.*?)</h1>}
@@ -25,7 +23,7 @@ class Pages < Merb::Controller
                params[:page]
              end
     
-    render :template => 'page'
+    render
     
   rescue Errno::ENOENT
     render "Not found", :status => 404, :format => :text
@@ -36,7 +34,7 @@ class Pages < Merb::Controller
     page = params[:title].gsub(/[^a-z0-9]/i, '-').gsub(/--+/, '-').downcase
     File.open(file_path(page), 'w') do |file|
       file.puts "<h1>#{params[:title]}</h1>"
-      file.puts File.read(Merb.dir_for(:views) / "views" / "template.html")
+      file.puts File.read(Merb.dir_for(:view) / "pages" / "template.html")
     end
 
     redirect "/" / page
