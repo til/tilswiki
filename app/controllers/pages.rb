@@ -45,19 +45,18 @@ class Pages < Application
     FileUtils.mkdir(dir) unless File.exists?(dir)
     (params[:files] || []).reject(&:blank?).each do |file|
       FileUtils.mv(file[:tempfile].path, dir / file[:filename])
-      @images << '/' / params[:page] / file[:filename]
+      @images << '/assets' / params[:page] / file[:filename]
     end
 
-    render :template => 'upload', :status => 201
+    render :status => 201
   end
   
   protected
   def file_path(page)
-    Merb.dir_for(:public) / "pages" / "#{page}.html"
+    Merb.root_path("pages", "#{page}.html")
   end
   
   def dir_path(page)
-    Merb.dir_for(:public) / "pages" / page
+    Merb.dir_for(:public) / "assets" / page
   end
 end
-
