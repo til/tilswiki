@@ -53,7 +53,7 @@ function progressUnsaved() {
 function progressSaving() {
   $('.progress').
     data('saving_at', (new Date()).getTime()).
-    html('<img src="/ajax-loader.gif" /><span>saving...</span>');
+    html('<img src="/images/ajax-loader.gif" /><span>saving...</span>');
 }
 function progressSaved() {
   var progress = $('.progress');
@@ -64,7 +64,7 @@ function progressSaved() {
   ||
     progress.data('saving_at') > progress.data('unsaved_at')
   ) {
-    progress.html('<img src="/ajax-loader-still.gif" /><span>saved</span>');
+    progress.html('<img src="/images/ajax-loader-still.gif" /><span>saved</span>');
 
     childrenToFadeOut = progress.children();
 
@@ -102,8 +102,8 @@ $(function() {
   wysiwyg.bind("keyup mouseup", checkIfDirty);
 
   // Preload progress indicator images
-  var preloaded_images = { loader: $('<img />').attr('src', "/ajax-loader.gif"),
-                           still:  $('<img />').attr('src', "/ajax-loader-still.gif") };
+  var preloaded_images = { loader: $('<img />').attr('src', "/images/ajax-loader.gif"),
+                           still:  $('<img />').attr('src', "/images/ajax-loader-still.gif") };
 
   $.each(
     ['bold', 'italic', 'insertHorizontalRule',
