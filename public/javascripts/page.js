@@ -1,105 +1,123 @@
-// progress gif from http://www.andrewdavidson.com/articles/spinning-wait-icons/
-// by-nc-sa licensed
+// The main tilswiki javascript module, concerned with core functionality
+// edit, autosave etc.
 
-// A global. Brrrr!
-var wysiwyg;
+var $tw = function() {
+  var tw = {};
+  var editing = true;
 
-function putContent() {
-  var successCallback = function(data, textStatus) {
-    // Only run the callback when no other ajax call has been started later
-    if ($('.progress').data('allowedSuccessCallback') === successCallback) {
-      progressSaved();
+  tw.putContent = function() {
+    var successCallback = function(data, textStatus) {
+      // Only run the callback when no other ajax call has been started later
+      if ($('.progress').data('allowedSuccessCallback') === successCallback) {
+        tw.progressSaved();
+      }
+    };
+
+    tw.progressSaving();
+
+    $('.progress').data('allowedSuccessCallback', successCallback);
+
+    tw.rememberSavedContent();
+
+    $.ajax({
+             url:     '/' + document.location.toString().split('/').pop(),
+             data:    { content: wysiwyg.html() },
+             type:    'PUT',
+             'success': successCallback
+           });
+  };
+
+  tw.rememberSavedContent = function() {
+    var wysiwyg = $('#wysiwyg');
+    wysiwyg.data('content', wysiwyg.html());
+  };
+
+  tw.putContentIfIdle = function() { };
+
+  tw.putContentIfIdle = function() {
+    var last_changed_time = $('#wysiwyg').data('last_changed_time');
+
+    if (last_changed_time && (new Date()).getTime() > last_changed_time + 1 * 1000) {
+      $('#wysiwyg').removeData('last_changed_time');
+      tw.putContent();
     }
-  }
 
-  progressSaving();
+    setTimeout(tw.putContentIfIdle, 1000);
+  };
 
-  $('.progress').data('allowedSuccessCallback', successCallback);
+  /*
+   * Functions that update the progress indicator area
+   */
+  tw.progressUnsaved = function() {
+    $('.progress').
+      data('unsaved_at', (new Date()).getTime()).
+      html('<span class="unsaved">changed</span>');
+  };
+  tw.progressSaving = function() {
+    $('.progress').
+      data('saving_at', (new Date()).getTime()).
+      html('<img src="/images/ajax-loader.gif" /><span>saving...</span>');
+  };
+  tw.progressSaved = function() {
+    var progress = $('.progress');
+    var childrenToFadeOut;
 
-  rememberSavedContent();
+    if (
+      !progress.data('unsaved_at')
+    ||
+      progress.data('saving_at') > progress.data('unsaved_at')
+    ) {
+      progress.html('<img src="/images/ajax-loader-still.gif" /><span>saved</span>');
 
-  $.ajax({
-           url:     '/' + document.location.toString().split('/').pop(),
-           data:    { content: wysiwyg.html() },
-           type:    'PUT',
-           'success': successCallback
-         });
-}
+      childrenToFadeOut = progress.children();
 
-function rememberSavedContent() {
-  var wysiwyg = $('#wysiwyg');
-  wysiwyg.data('content', wysiwyg.html());
-}
+      setTimeout(function() {
+        childrenToFadeOut.fadeOut('slow');
+      }, 1000);
+    }
+  };
 
-function putContentIfIdle() {
-  var last_changed_time = $('#wysiwyg').data('last_changed_time');
+  tw.suspendEditing = function() {
+    editing = false;
+  };
+  tw.resumeEditing = function() {
+    editing = true;
+    tw.checkIfDirty();
+  };
 
-  if (last_changed_time && (new Date()).getTime() > last_changed_time + 1 * 1000) {
-    $('#wysiwyg').removeData('last_changed_time');
-    putContent();
-  }
+  // Call this whenever content may have changed
+  tw.checkIfDirty = function() {
+    var wysiwyg = $("#wysiwyg");
 
-  setTimeout(putContentIfIdle, 1000);
-}
+    if (!editing) {
+      return;
+    }
+    if (wysiwyg.data('content') !== wysiwyg.html()) {
+      wysiwyg.data('last_changed_time', (new Date()).getTime());
+      tw.progressUnsaved();
+    }
+  };
 
-/*
- * Functions that update the progress indicator area
- */
-function progressUnsaved() {
-  $('.progress').
-    data('unsaved_at', (new Date()).getTime()).
-    html('<span class="unsaved">changed</span>');
-}
-function progressSaving() {
-  $('.progress').
-    data('saving_at', (new Date()).getTime()).
-    html('<img src="/images/ajax-loader.gif" /><span>saving...</span>');
-}
-function progressSaved() {
-  var progress = $('.progress');
-  var childrenToFadeOut;
+  tw.imageUploadSuccess = function(data) {
+    $(data).find('ul.uploaded img').each(function() {
+      document.execCommand('insertImage', false, this.src);
+    });
 
-  if (
-    !progress.data('unsaved_at')
-  ||
-    progress.data('saving_at') > progress.data('unsaved_at')
-  ) {
-    progress.html('<img src="/images/ajax-loader-still.gif" /><span>saved</span>');
+    tb_remove(); // close thickbox
 
-    childrenToFadeOut = progress.children();
+    tw.drag.imagesDraggable();
 
-    setTimeout(function() {
-      childrenToFadeOut.fadeOut('slow');
-    }, 1000);
-  }
-}
+    tw.checkIfDirty();
+  };
 
-// Call this whenever content may have changed
-function checkIfDirty() {
-  if (dragMode) {
-    return;
-  }
-  if (wysiwyg.data('content') !== wysiwyg.html()) {
-    wysiwyg.data('last_changed_time', (new Date()).getTime());
-    progressUnsaved();
-  }
-}
-
-function imageUploadSuccess(data) {
-  $(data).find('ul.uploaded img').each(function() {
-    document.execCommand('insertImage', false, this.src);
-  });
-
-  tb_remove();
-  imagesDraggable();
-  checkIfDirty();
-}
+  return tw;
+}();
 
 
 $(function() {
   wysiwyg = $('#wysiwyg');
 
-  wysiwyg.bind("keyup mouseup", checkIfDirty);
+  wysiwyg.bind("keyup mouseup", $tw.checkIfDirty);
 
   // Preload progress indicator images
   var preloaded_images = { loader: $('<img />').attr('src', "/images/ajax-loader.gif"),
@@ -143,22 +161,12 @@ $(function() {
     }
   );
 
-  $('.panel a').mousedown(checkIfDirty);
+  $('.panel a').mousedown($tw.checkIfDirty);
 
-  $('#imageUpload form').ajaxForm({ dataType: 'xml', success: imageUploadSuccess });
+  $('#imageUpload form').ajaxForm({ dataType: 'xml', success: $tw.imageUploadSuccess });
 
-  rememberSavedContent();
-  putContentIfIdle();
-
-  imagesDraggable();
-
-  // This can be used to make the offset of br elements visible, for debugging the drop target
-  // algorithm
-  //$('h1,h2,h3,br', wysiwyg).each(function() {
-  //  e = $(this);
-  //  line = $('<div class="debugLine"></div>').css('top', e.offset().top + 'px');
-  //  $('body').prepend(line);
-  //});
+  $tw.rememberSavedContent();
+  $tw.putContentIfIdle();
 
   $('#imageUpload a.cancel').click(function() {
     tb_remove();
@@ -171,4 +179,5 @@ $(function() {
     }
     return false;
   });
+
 });
