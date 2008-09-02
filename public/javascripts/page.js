@@ -100,7 +100,17 @@ var $tw = function() {
 
   tw.imageUploadSuccess = function(data) {
     $(data).find('ul.uploaded img').each(function() {
-      document.execCommand('insertImage', false, this.src);
+      var src;
+
+      // Remove leading protocol and server name from src if present
+      var match = /^[^\/]+:\/\/[^\/]+(\/.*)$/.exec(this.src);
+      if (match) {
+        src = match[1];
+      } else {
+        src = this.src;
+      }
+
+      document.execCommand('insertImage', false, src);
     });
 
     tb_remove(); // close thickbox
