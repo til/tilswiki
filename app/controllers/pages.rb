@@ -5,7 +5,7 @@ class Pages < Application
       redirect '/' / params[:page]
     end
 
-    @content = File.read(file_path(params[:page]))
+    @content = File.read(html_file_path(params[:page]))
     
     @title = if @content =~ %r{^\s*<h1>(.*?)</h1>}
                $1.gsub(/<[^>]+>/, '')
@@ -22,7 +22,7 @@ class Pages < Application
   # POST / title=...
   def create
     page = params[:title].gsub(/[^a-z0-9]/i, '-').gsub(/--+/, '-').downcase
-    File.open(file_path(page), 'w') do |file|
+    File.open(html_file_path(page), 'w') do |file|
       file.puts "<h1>#{params[:title]}</h1>"
       file.puts File.read(Merb.dir_for(:view) / "pages" / "template.html")
     end
@@ -31,7 +31,7 @@ class Pages < Application
   end
   
   def update
-    File.open(file_path(params[:page]), 'w') do |file|
+    File.open(html_file_path(params[:page]), 'w') do |file|
       file.puts params[:content]
     end
     
@@ -39,7 +39,7 @@ class Pages < Application
   end
 
   def upload
-    dir = dir_path(params[:page])
+    dir = assets_dir_path(params[:page])
     @images = []
 
     FileUtils.mkdir(dir) unless File.exists?(dir)
@@ -52,11 +52,11 @@ class Pages < Application
   end
   
   protected
-  def file_path(page)
+  def html_file_path(page)
     Merb.root_path("pages", "#{page}.html")
   end
   
-  def dir_path(page)
+  def assets_dir_path(page)
     Merb.dir_for(:public) / "assets" / page
   end
 end
