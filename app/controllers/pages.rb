@@ -14,6 +14,7 @@ class Pages < Application
              end
     
     @headers['Cache-control'] = "no-cache"
+    
 
     render
     
