@@ -13,6 +13,8 @@ class Pages < Application
                params[:page]
              end
     
+    @headers['Cache-control'] = "no-cache"
+
     render
     
   rescue Errno::ENOENT
