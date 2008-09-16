@@ -1,0 +1,42 @@
+To all files distributed with tilswiki the following copyright notice
+applies, unless a different copyright is noted explicitely in the file
+or it is one of the exceptions listed below.
+
+
+Copyright (C) 2008 Tilmann Singer
+
+tilswiki is free software: you can redistribute it and/or modify it
+under the terms of the GNU Affero General Public License as published
+by the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+tilswiki is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with tilswiki. If not, see <http://www.gnu.org/licenses/>.
+
+
+
+=== Exceptions ===
+
+The files at
+
+public/images/ajax-loader.gif
+public/images/ajax-loader-still.gif
+
+are from http://www.andrewdavidson.com/articles/spinning-wait-icons/
+and licensed under Attribution-Noncommercial-Share Alike 2.5 Generic
+http://creativecommons.org/licenses/by-nc-sa/2.5/
+
+   ---
+
+The file at
+
+public/images/controls.gif
+
+is adapted from the jQuery WYSIWYG plugin http://code.google.com/p/jwysiwyg/
+and dual licensed under MIT and GPL.
+
