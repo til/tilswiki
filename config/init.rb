@@ -165,3 +165,6 @@ end
 # And the result is:
 # irb> "wife".plural
 # => wives
+
+require 'RMagick'
+

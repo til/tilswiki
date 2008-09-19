@@ -99,18 +99,9 @@ var $tw = function() {
   };
 
   tw.imageUploadSuccess = function(data) {
-    $(data).find('ul.uploaded img').each(function() {
-      var src;
-
-      // Remove leading protocol and server name from src if present
-      var match = /^[^\/]+:\/\/[^\/]+(\/.*)$/.exec(this.src);
-      if (match) {
-        src = match[1];
-      } else {
-        src = this.src;
-      }
-
-      document.execCommand('insertImage', false, src);
+    $(data).find('ul li.asset').each(function() {
+      var a = $('a.medium', $(this));
+      document.execCommand('insertImage', false, a.attr('href'));
     });
 
     tb_remove(); // close thickbox

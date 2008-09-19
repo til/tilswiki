@@ -42,24 +42,15 @@ class Pages < Application
   end
 
   def upload
-    dir = assets_dir_path(params[:page])
-    @images = []
-
-    FileUtils.mkdir(dir) unless File.exists?(dir)
-    (params[:files] || []).reject(&:blank?).each do |file|
-      FileUtils.mv(file[:tempfile].path, dir / file[:filename])
-      @images << '/assets' / params[:page] / file[:filename]
-    end
-
+    @assets = (params[:files] || []).
+      reject(&:blank?).
+      collect { |file| Asset.create(params[:page], file) }
+    
     render :status => 201
   end
   
-  protected
+protected
   def html_file_path(page)
     Merb.root_path("pages", "#{page}.html")
-  end
-  
-  def assets_dir_path(page)
-    Merb.dir_for(:public) / "assets" / page
   end
 end

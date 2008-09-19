@@ -1,5 +1,11 @@
-<ul class="uploaded">
-  <% @images.each do |src| -%>
-    <li><img src="<%= src %>" /></li>
+<ul>
+  <% @assets.each do |asset| -%>
+    <li class="asset">
+      <ul>
+      <% asset.version_paths.each do |version, src| -%>
+        <li class="version"><a class="<%= version %>" href="<%= src %>"><%= version %></a></li>
+      <% end -%>
+      </ul>
+    </li>
   <% end -%>
 </ul>

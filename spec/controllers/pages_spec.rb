@@ -1,7 +1,11 @@
 require File.join(File.dirname(__FILE__), '..', 'spec_helper.rb')
 
-describe Pages, "index action" do
+describe Pages, "upload action" do
   before(:each) do
-    dispatch_to(Pages, :index)
+    @response = dispatch_to(Pages, :upload)
+  end
+
+  it "should return 201" do
+    @response.status.should == 201
   end
 end
