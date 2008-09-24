@@ -1,11 +1,22 @@
 <ul>
   <% @assets.each do |asset| -%>
     <li class="asset">
-      <ul>
-      <% asset.version_paths.each do |version, src| -%>
-        <li class="version"><a class="<%= version %>" href="<%= src %>"><%= version %></a></li>
+      <div class="image">
+      <% asset.versions.each do |version, src, width, height|
+        # One img tag for each size. That may not be the best solution because
+        # browsers might download all images on page display
+
+        classes = version
+        classes << ' current' if version == 'small'
+        -%>
+        <%= tag :img, 
+                :src => src, 
+                :class => classes,
+                :width => width,
+                :height => height,
+                :alt => src.split('/').last %>
       <% end -%>
-      </ul>
+      </div>
     </li>
   <% end -%>
 </ul>

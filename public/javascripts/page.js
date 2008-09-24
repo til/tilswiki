@@ -89,9 +89,8 @@ var $tw = function() {
   tw.checkIfDirty = function() {
     var wysiwyg = $("#wysiwyg");
 
-    if (!editing) {
-      return;
-    }
+    if (!editing) { return; }
+
     if (wysiwyg.data('content') !== wysiwyg.html()) {
       wysiwyg.data('last_changed_time', (new Date()).getTime());
       tw.progressUnsaved();
@@ -100,15 +99,113 @@ var $tw = function() {
 
   tw.imageUploadSuccess = function(data) {
     $(data).find('ul li.asset').each(function() {
-      var a = $('a.medium', $(this));
-      document.execCommand('insertImage', false, a.attr('href'));
+      $('#wysiwyg').append($('div.image', this)).append('<br/>');
     });
 
     tb_remove(); // close thickbox
 
-    tw.drag.imagesDraggable();
+    tw.activateImageEvents();
 
     tw.checkIfDirty();
+  };
+
+  tw.activateImageEvents = function() {
+    $('#wysiwyg div.image').
+      attr('contenteditable', false).
+      bind('mouseenter', function() {
+        //var panel = $('<div class="imagePanel">X</div>');
+        //panel.css({
+        //  position: 'absolute',
+        //  top: $(this).offset().top - 25,
+        //  height: 25,
+        //  left: $(this).offset().left,
+        //  width: $(this).width() - 2,
+        //  'border-bottom': 'none'
+        //});
+
+
+        var resizeCorner = $('<div class="resizeCorner"></div>');
+
+        resizeCorner.
+          css({
+            position : 'absolute',
+            top      : $(this).offset().top + $(this).height() - 24,
+            left     : $(this).offset().left + $(this).width() - 25,
+            'z-index': 100
+          }).
+          mousedown(function() {
+            // Resize start
+            tw.suspendEditing();
+            $('body').css('cursor', 'se-resize');
+
+            var imageContainer = $(this).parent();
+            var currentImage   = $('img.current', imageContainer);
+
+            var resizeFrame = $('<div class="resizeFrame"></div>');
+            resizeFrame.css({
+              top   : currentImage.offset().top,
+              left  : currentImage.offset().left,
+              width : currentImage.width(),
+              height: currentImage.height()
+            });
+            $('body').append(resizeFrame);
+
+            var images = $('img', imageContainer);
+            var thresholdsX = Array();
+            var thresholdsY = Array();
+            for (var i = 0; i < images.length; i++) {
+              if (images[i+1]) {
+                thresholdsX.push(
+                  imageContainer.offset().left + images[i].width + (images[i+1].width - images[i].width)/2
+                );
+                thresholdsY.push(
+                  imageContainer.offset().top + images[i].height + (images[i+1].height - images[i].height)/2
+                );
+              }
+            }
+
+            $(document).
+              mousemove(function(mouseEvent) {
+                var idx = 0;
+                for (var i = 0; i < thresholdsX.length; i++) {
+                  if (mouseEvent.pageX < thresholdsX[i] && mouseEvent.pageY < thresholdsY[i]) {
+                    break;
+                  }
+                  idx++;
+                }
+                if (images[idx].width != resizeFrame.width()) {
+                  resizeFrame.css({
+                    width : images[idx].width,
+                    height: images[idx].height
+                  });
+                }
+                return false;
+              }).
+              one('mouseup', function() {
+                $(document).unbind('mousemove');
+
+                $('img', imageContainer).
+                  removeClass('current').
+                  filter('[width=' + resizeFrame.width() + ']').
+                  addClass('current');
+
+                resizeFrame.remove();
+                resizeCorner.remove();
+                $('body').css('cursor', '');
+
+                tw.resumeEditing();
+              });
+
+            return false;
+          });
+
+        $(this).append(resizeCorner);
+      }).
+      bind('mouseleave', function() {
+        if (!editing) { return; }
+
+        $('.imagePanel, .resizeCorner').remove();
+      });
   };
 
   return tw;
@@ -180,5 +277,7 @@ $(function() {
     }
     return false;
   });
+
+  $tw.activateImageEvents();
 
 });

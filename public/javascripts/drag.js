@@ -57,11 +57,7 @@ $tw.drag = function(tw) {
     }
   };
 
-  drag.imagesDraggable = function() {
-    $('#wysiwyg img').
-      attr('contenteditable', false).
-      mousedown(drag.start);
-  };
+
 
   return drag;
 }($tw);
@@ -70,7 +66,7 @@ $tw.drag = function(tw) {
 
 $(function() {
 
-  $tw.drag.imagesDraggable();
+  //$tw.drag.imagesDraggable();
 
   // This can be used to make the offset of br elements visible, for debugging the drop target
   // algorithm

@@ -1,5 +1,5 @@
 class Asset
-  VERSIONS = [['thumbnail', '100x100'], ['small', '300x300'], ['medium', '450x450']]
+  VERSIONS = [['thumbnail', '100x100'], ['small', '300x300'], ['medium', '450x450'], ['large', '800x800']]
   attr :filename, :page
 
   def self.create(page, file)
@@ -32,14 +32,20 @@ class Asset
     end
   end
 
-  def version_paths
-    VERSIONS.map(&:first).map do |version|
-      if File.exist?("#{storage_dir}/#{basename}.#{version}.#{extension}")
-        [version, "/assets/#{@page}/#{basename}.#{version}.#{extension}"]
+  # Array with one array for each version: [version, path, width, height]
+  def versions
+    versions = VERSIONS.map(&:first).map do |version|
+      file = "#{storage_dir}/#{basename}.#{version}.#{extension}"
+      if File.exist?(file)
+        image = Magick::Image.read(file).first
+        [version, "/assets/#{@page}/#{basename}.#{version}.#{extension}", image.columns, image.rows]
       else
         nil
       end
-    end.compact << ['original', "/assets/#{@page}/#{basename}.#{extension}"]
+    end.compact
+    
+    image = Magick::Image.read("#{storage_dir}/#{basename}.#{extension}").first
+    versions << ['original', "/assets/#{@page}/#{basename}.#{extension}", image.columns, image.rows]
   end
 
   def original
