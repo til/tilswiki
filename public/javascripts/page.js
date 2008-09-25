@@ -141,10 +141,11 @@ var $tw = function() {
               css('cursor', 'move').
               append(dropTarget);
 
-            var targetElements = $('h1, h2, h3, br, div.image', $('#wysiwyg'));
+            var targetElements = $('h1, h2, h3, br, div.image, p', $('#wysiwyg'));
             var targets = targetElements.map(function() {
-              return $(this).offset().top + 2;
+              return $(this).position().top + 2;
             }).get().sort(function(a, b) { return a - b; });
+            //console.log("targets: " + targets);
 
             $(document).
               mousemove(function(mouseEvent) {
@@ -154,7 +155,7 @@ var $tw = function() {
                     break;
                   }
                 }
-                if (dropTarget.offset().top != targets[idx]) {
+                if (dropTarget.position().top != targets[idx]) {
                   dropTarget.css('top', targets[idx]);
                 }
                 return false;
@@ -169,8 +170,8 @@ var $tw = function() {
                 targetElements.each(function() {
                   var that = $(this);
                   if (closest) {
-                    if (Math.abs(dropTarget.offset().top - that.offset().top) <
-                        Math.abs(dropTarget.offset().top - closest.offset().top)) {
+                    if (Math.abs(dropTarget.position().top - that.position().top) <
+                        Math.abs(dropTarget.position().top - closest.position().top)) {
                       closest = that;
                     }
                   } else {
@@ -192,7 +193,7 @@ var $tw = function() {
         var resizeCorner = $('<div class="resizeCorner"></div>').
           css({
             position : 'absolute',
-            top      : $(this).offset().top + $(this).height() - 24,
+            top      : $(this).offset().top + $(this).height() - 25,
             left     : $(this).offset().left + $(this).width() - 25,
             'z-index': 100
           }).
@@ -335,7 +336,7 @@ $(function() {
   });
 
   $('#imageUpload p.more a').click(function() {
-    for (i = 0; i < 3; i++) {
+    for (var i = 0; i < 3; i++) {
       $(this).parent().before('<input type="file" name="files[]" /><br />');
     }
     return false;
