@@ -8,9 +8,14 @@ body {
   margin-right: 80px;
 }
 
-#dropTarget {
-  background: lightgrey;
-  height: 10px;
+.dropTarget {
+  position: fixed;
+  left: 10px;
+  top: 10px;
+
+  height: 0;
+  width: 600px;
+  border-top: 5px dashed lightgrey;
 }
 
 .debugLine {
@@ -38,7 +43,7 @@ form .help {
   font-size: smaller;
 }
 
-.imagePanel, .resizeCorner {
+.titleBar, .resizeCorner {
   border: 1px solid black;
   background-color: #efefef;
 }
@@ -66,13 +71,13 @@ form .help {
   visibility: visible;
 }
 
+.titleBar {
+  -moz-border-radius-topleft: 5px;
+  -webkit-border-radius-top-left: 5px;
+  -moz-border-radius-topright: 5px;
+  -webkit-border-radius-top-right: 5px;
 
-.imagePanel {
-  width: 30px;
-  height: 80px;
-
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
+  cursor: move;
 }
 
 

@@ -78,10 +78,12 @@ var $tw = function() {
   };
 
   tw.suspendEditing = function() {
+    $('#wysiwyg').attr('contenteditable', false);
     editing = false;
   };
   tw.resumeEditing = function() {
     editing = true;
+    $('#wysiwyg').attr('contenteditable', true);
     tw.checkIfDirty();
   };
 
@@ -113,20 +115,81 @@ var $tw = function() {
     $('#wysiwyg div.image').
       attr('contenteditable', false).
       bind('mouseenter', function() {
-        //var panel = $('<div class="imagePanel">X</div>');
-        //panel.css({
-        //  position: 'absolute',
-        //  top: $(this).offset().top - 25,
-        //  height: 25,
-        //  left: $(this).offset().left,
-        //  width: $(this).width() - 2,
-        //  'border-bottom': 'none'
-        //});
+        var imageContainer = $(this);
 
+        var titleBar = $('<div class="titleBar"></div>').
+          attr('contenteditable', false).
+          css({
+            position: 'absolute',
+            top: $(this).offset().top - 25,
+            height: 25,
+            left: $(this).offset().left,
+            width: $(this).width() - 2,
+            'border-bottom': 'none'
+          }).
+          mousedown(function() {
+            // Drag start
+            tw.suspendEditing();
 
-        var resizeCorner = $('<div class="resizeCorner"></div>');
+            var dropTarget = $('<div class="dropTarget"></div>').
+              css({
+                width: $('#wysiwyg').width(),
+                left:  $('#wysiwyg').offset().left
+              });
 
-        resizeCorner.
+            $('body').
+              css('cursor', 'move').
+              append(dropTarget);
+
+            var targetElements = $('h1, h2, h3, br, div.image', $('#wysiwyg'));
+            var targets = targetElements.map(function() {
+              return $(this).offset().top + 2;
+            }).get().sort(function(a, b) { return a - b; });
+
+            $(document).
+              mousemove(function(mouseEvent) {
+                var idx;
+                for (idx = 0; idx < targets.length-1; idx++) {
+                  if (mouseEvent.pageY < targets[idx] + (targets[idx+1] - targets[idx]) / 2) {
+                    break;
+                  }
+                }
+                if (dropTarget.offset().top != targets[idx]) {
+                  dropTarget.css('top', targets[idx]);
+                }
+                return false;
+              }).
+              one('mouseup', function() {
+                // Drop
+                $(document).unbind('mousemove');
+                $('body').css('cursor', '');
+                $('.titleBar, .resizeCorner').remove();
+
+                var closest;
+                targetElements.each(function() {
+                  var that = $(this);
+                  if (closest) {
+                    if (Math.abs(dropTarget.offset().top - that.offset().top) <
+                        Math.abs(dropTarget.offset().top - closest.offset().top)) {
+                      closest = that;
+                    }
+                  } else {
+                    closest = that;
+                  }
+                });
+                imageContainer.remove();
+                closest.before(imageContainer);
+
+                dropTarget.remove();
+                tw.resumeEditing();
+                tw.activateImageEvents();
+                return false;
+              });
+            return false;
+          });
+        $(this).append(titleBar);
+
+        var resizeCorner = $('<div class="resizeCorner"></div>').
           css({
             position : 'absolute',
             top      : $(this).offset().top + $(this).height() - 24,
@@ -138,7 +201,6 @@ var $tw = function() {
             tw.suspendEditing();
             $('body').css('cursor', 'se-resize');
 
-            var imageContainer = $(this).parent();
             var currentImage   = $('img.current', imageContainer);
 
             var resizeFrame = $('<div class="resizeFrame"></div>');
@@ -182,6 +244,7 @@ var $tw = function() {
                 return false;
               }).
               one('mouseup', function() {
+                // Resize stop
                 $(document).unbind('mousemove');
 
                 $('img', imageContainer).
@@ -204,7 +267,7 @@ var $tw = function() {
       bind('mouseleave', function() {
         if (!editing) { return; }
 
-        $('.imagePanel, .resizeCorner').remove();
+        $('.titleBar, .resizeCorner').remove();
       });
   };
 
