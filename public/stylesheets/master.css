@@ -33,7 +33,7 @@ body {
   float: left;
 }
 
-h1,h2,h3 {
+h1,h2,h3,hr {
   clear: both;
 }
 
