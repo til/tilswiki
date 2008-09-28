@@ -6,25 +6,31 @@
 <div class="panel">
 <ul class="panel">
 
-<li><a class="h1" title="Make current line a big heading"><!-- --></a></li>
-<li><a class="h2" title="Make current line a medium heading"><!-- --></a></li>
-<li><a class="h3" title="Make current line a small heading"><!-- --></a></li>
+<li><a class="h1" title="Make current line a big heading" href="#"><!-- --></a></li>
+<li><a class="h2" title="Make current line a medium heading" href="#"><!-- --></a></li>
+<li><a class="h3" title="Make current line a small heading" href="#"><!-- --></a></li>
 
-<li><a class="bold" title="Make selected text bold"><!-- --></a></li>
-<li><a class="italic" title="Make selected text italic"><!-- --></a></li>
+<li><a class="bold" title="Make selected text bold" href="#"><!-- --></a></li>
+<li><a class="italic" title="Make selected text italic" href="#"><!-- --></a></li>
 
-<li class="break"><a class="colorRed" title="Make selected text red"><!-- --></a></li>
-<li><a class="colorGreen" title="Make selected text green"><!-- --></a></li>
-<li><a class="colorBlue" title="Make selected text blue"><!-- --></a></li>
+<li class="break"><a class="colorRed" title="Make selected text red" href="#"><!-- --></a></li>
+<li><a class="colorGreen" title="Make selected text green" href="#"><!-- --></a></li>
+<li><a class="colorBlue" title="Make selected text blue" href="#"><!-- --></a></li>
 
-<li><a class="increaseFontSize" title="Make selected text larger"><!-- --></a></li>
-<li><a class="decreaseFontSize" title="Make selected text smaller"><!-- --></a></li>
+<li><a class="increaseFontSize" title="Make selected text larger" href="#"><!-- --></a></li>
+<li><a class="decreaseFontSize" title="Make selected text smaller" href="#"><!-- --></a></li>
 
-<li class="break"><a class="insertHorizontalRule" title="Insert horizontal rule"><!-- --></a></li>
+<li class="break"><a class="insertHorizontalRule" title="Insert horizontal rule" href="#"><!-- --></a></li>
 
 <li class="break"><a class="insertImage thickbox" title="Insert images" 
     href="#TB_inline?height=300&width=300&inlineId=imageUpload"><!-- --></a></li>
+
+<li class="break">
+  <a class="subscription thickbox" title="Subscribe to update notifications by Email" 
+     href="<%= '/' / params[:page] / 'subscription' %>?height=300&width=400"><!-- --></a>
+</li>
 </ul>
+
 <p class="progress"></p>
 </div>
 
@@ -46,3 +52,4 @@
   </p>
 <% end =%>
 </div>
+

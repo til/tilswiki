@@ -31,5 +31,9 @@ Merb::Router.prepare do |r|
   r.match('/:page', :method => 'put' ).to(:controller => 'Pages', :action => 'update')
   r.match('/:page', :method => 'post').to(:controller => 'Pages', :action => 'upload')
 
+  r.match('/:page/subscription',  :method => 'get'  ).to(:controller => 'Subscriptions', :action => 'show')
+  r.match('/:page/subscription',  :method => 'post' ).to(:controller => 'Subscriptions', :action => 'create')
+  r.match('/unsubscribe/:secret', :method => 'get'  ).to(:controller => 'Subscriptions', :action => 'unsubscribe')
+
   r.default_routes
 end

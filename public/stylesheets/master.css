@@ -38,7 +38,7 @@ h1,h2,h3,hr {
 }
 
 
-form .help {
+.help {
   color: grey;
   font-size: smaller;
 }
@@ -128,7 +128,7 @@ div.panel .progress span.unsaved {
 
 ul.panel li { list-style-type: none; float: left; margin: 0 2px; }
 ul.panel li.break { clear: both; }
-ul.panel li a { opacity: 0.6; display: block; width: 16px; height: 16px; background: url('/images/controls.gif') no-repeat -64px -80px; border: 0; cursor: pointer; padding: 1px; }
+ul.panel li a { opacity: 0.6; display: block; width: 16px; height: 16px; background: url('/images/controls.png') no-repeat -64px -80px; border: 0; cursor: pointer; padding: 1px; }
 ul.panel li a:hover, ul.panel li a.active { opacity: 0.99; }
 ul.panel li a.active { background-color: #f9f9f9; border: 1px solid #ccc; border-left-color: #AAA; border-top-color: #AAA; padding: 0; }
 
@@ -171,6 +171,7 @@ ul.panel li a.increaseFontSize { background-position: -16px -80px; }
 ul.panel li a.decreaseFontSize { background-position: -32px -80px; }
 
 ul.panel li a.createLink { background-position: -80px -48px; }
+ul.panel li a.subscription { background-position: -48px -80px; }
 ul.panel li a.insertImage { background-position: -80px -80px; }
 
 ul.panel li a.html { background-position: -48px -48px; }

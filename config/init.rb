@@ -64,21 +64,22 @@ Merb::BootLoader.after_app_loads do
 end
 
 #
-# ==== Set up your ORM of choice
+# ORM of choice
 #
 
-# Merb doesn't come with database support by default.  You need
-# an ORM plugin.  Install one, and uncomment one of the following lines,
-# if you need a database.
+dependency 'dm-timestamps'
+dependency 'dm-validations'
 
-# Uncomment for DataMapper ORM
-# use_orm :datamapper
+use_orm :datamapper
 
-# Uncomment for ActiveRecord ORM
-# use_orm :activerecord
 
-# Uncomment for Sequel ORM
-# use_orm :sequel
+#
+# Mailer
+# 
+
+require 'merb-mailer'
+
+Merb::Mailer.delivery_method = :sendmail
 
 
 #
