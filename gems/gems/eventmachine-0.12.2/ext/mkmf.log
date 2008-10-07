@@ -1,0 +1,105 @@
+have_library: checking for main() in -lpthread... -------------------- yes
+
+"gcc -o conftest -I. -I/usr/lib/ruby/1.8/i686-linux -I.  -D_FILE_OFFSET_BITS=64  -march=i686 -mtune=generic -O2 -pipe  -fPIC   conftest.c  -L. -L/usr/lib -Wl,-R/usr/lib -L.  -rdynamic -Wl,-export-dynamic     -lruby-static -lpthread  -lpthread -ldl -lcrypt -lm   -lc"
+checked program was:
+/* begin */
+1: /*top*/
+2: int main() { return 0; }
+3: int t() { void ((*volatile p)()); p = (void ((*)()))main; return 0; }
+/* end */
+
+--------------------
+
+have_header: checking for sys/epoll.h... -------------------- yes
+
+"gcc -E -I. -I/usr/lib/ruby/1.8/i686-linux -I.  -D_FILE_OFFSET_BITS=64  -march=i686 -mtune=generic -O2 -pipe  -fPIC    conftest.c -o conftest.i"
+checked program was:
+/* begin */
+1: #include <sys/epoll.h>
+/* end */
+
+--------------------
+
+have_func: checking for rb_thread_blocking_region()... -------------------- no
+
+"gcc -o conftest -I. -I/usr/lib/ruby/1.8/i686-linux -I.  -D_FILE_OFFSET_BITS=64  -march=i686 -mtune=generic -O2 -pipe  -fPIC   conftest.c  -L. -L/usr/lib -Wl,-R/usr/lib -L.  -rdynamic -Wl,-export-dynamic    -lpthread  -lruby-static -lpthread  -lpthread -ldl -lcrypt -lm   -lc"
+conftest.c: In function ‘t’:
+conftest.c:3: error: ‘rb_thread_blocking_region’ undeclared (first use in this function)
+conftest.c:3: error: (Each undeclared identifier is reported only once
+conftest.c:3: error: for each function it appears in.)
+checked program was:
+/* begin */
+1: /*top*/
+2: int main() { return 0; }
+3: int t() { void ((*volatile p)()); p = (void ((*)()))rb_thread_blocking_region; return 0; }
+/* end */
+
+"gcc -o conftest -I. -I/usr/lib/ruby/1.8/i686-linux -I.  -D_FILE_OFFSET_BITS=64  -march=i686 -mtune=generic -O2 -pipe  -fPIC   conftest.c  -L. -L/usr/lib -Wl,-R/usr/lib -L.  -rdynamic -Wl,-export-dynamic    -lpthread  -lruby-static -lpthread  -lpthread -ldl -lcrypt -lm   -lc"
+/tmp/ccRAjHeq.o: In function `t':
+conftest.c:(.text+0x33): undefined reference to `rb_thread_blocking_region'
+collect2: ld returned 1 exit status
+checked program was:
+/* begin */
+1: /*top*/
+2: int main() { return 0; }
+3: int t() { rb_thread_blocking_region(); return 0; }
+/* end */
+
+--------------------
+
+have_library: checking for main() in -lcrypto... -------------------- yes
+
+"gcc -o conftest -I. -I/usr/lib/ruby/1.8/i686-linux -I. -I/include/include  -D_FILE_OFFSET_BITS=64  -march=i686 -mtune=generic -O2 -pipe  -fPIC   conftest.c  -L. -L/usr/lib -Wl,-R/usr/lib -L/include/lib -Wl,-R/include/lib -L.  -rdynamic -Wl,-export-dynamic    -lpthread  -lruby-static -lcrypto -lpthread  -lpthread -ldl -lcrypt -lm   -lc"
+checked program was:
+/* begin */
+1: /*top*/
+2: int main() { return 0; }
+3: int t() { void ((*volatile p)()); p = (void ((*)()))main; return 0; }
+/* end */
+
+--------------------
+
+have_library: checking for main() in -lssl... -------------------- yes
+
+"gcc -o conftest -I. -I/usr/lib/ruby/1.8/i686-linux -I. -I/include/include  -D_FILE_OFFSET_BITS=64  -march=i686 -mtune=generic -O2 -pipe  -fPIC   conftest.c  -L. -L/usr/lib -Wl,-R/usr/lib -L/include/lib -Wl,-R/include/lib -L.  -rdynamic -Wl,-export-dynamic    -lcrypto -lpthread  -lruby-static -lssl -lcrypto -lpthread  -lpthread -ldl -lcrypt -lm   -lc"
+checked program was:
+/* begin */
+1: /*top*/
+2: int main() { return 0; }
+3: int t() { void ((*volatile p)()); p = (void ((*)()))main; return 0; }
+/* end */
+
+--------------------
+
+have_library: checking for main() in -lcrypto... -------------------- yes
+
+"gcc -o conftest -I. -I/usr/lib/ruby/1.8/i686-linux -I. -I/include/include  -D_FILE_OFFSET_BITS=64  -march=i686 -mtune=generic -O2 -pipe  -fPIC   conftest.c  -L. -L/usr/lib -Wl,-R/usr/lib -L/include/lib -Wl,-R/include/lib -L.  -rdynamic -Wl,-export-dynamic    -lssl -lcrypto -lpthread  -lruby-static -lcrypto -lssl -lcrypto -lpthread  -lpthread -ldl -lcrypt -lm   -lc"
+checked program was:
+/* begin */
+1: /*top*/
+2: int main() { return 0; }
+3: int t() { void ((*volatile p)()); p = (void ((*)()))main; return 0; }
+/* end */
+
+--------------------
+
+have_header: checking for openssl/ssl.h... -------------------- yes
+
+"gcc -E -I. -I/usr/lib/ruby/1.8/i686-linux -I. -I/include/include  -D_FILE_OFFSET_BITS=64  -march=i686 -mtune=generic -O2 -pipe  -fPIC    conftest.c -o conftest.i"
+checked program was:
+/* begin */
+1: #include <openssl/ssl.h>
+/* end */
+
+--------------------
+
+have_header: checking for openssl/err.h... -------------------- yes
+
+"gcc -E -I. -I/usr/lib/ruby/1.8/i686-linux -I. -I/include/include  -D_FILE_OFFSET_BITS=64  -march=i686 -mtune=generic -O2 -pipe  -fPIC    conftest.c -o conftest.i"
+checked program was:
+/* begin */
+1: #include <openssl/err.h>
+/* end */
+
+--------------------
+
