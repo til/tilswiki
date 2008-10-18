@@ -1,6 +1,6 @@
 class Index < Application
 
   def index
-    render
+    render :layout => false
   end
 end
