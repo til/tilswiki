@@ -27,12 +27,12 @@ Merb::Router.prepare do |r|
   r.match('/', :method => 'get' ).to(:controller => 'Index', :action => 'index')
   r.match('/', :method => 'post').to(:controller => 'Pages', :action => 'create')
 
-  r.match('/:page', :method => 'get' ).to(:controller => 'Pages', :action => 'show')
-  r.match('/:page', :method => 'put' ).to(:controller => 'Pages', :action => 'update')
-  r.match('/:page', :method => 'post').to(:controller => 'Pages', :action => 'upload')
+  r.match('/:handle', :method => 'get' ).to(:controller => 'Pages', :action => 'show')
+  r.match('/:handle', :method => 'put' ).to(:controller => 'Pages', :action => 'update')
+  r.match('/:handle', :method => 'post').to(:controller => 'Pages', :action => 'upload')
 
-  r.match('/:page/subscription',  :method => 'get'  ).to(:controller => 'Subscriptions', :action => 'show')
-  r.match('/:page/subscription',  :method => 'post' ).to(:controller => 'Subscriptions', :action => 'create')
+  r.match('/:handle/subscription',  :method => 'get'  ).to(:controller => 'Subscriptions', :action => 'show')
+  r.match('/:handle/subscription',  :method => 'post' ).to(:controller => 'Subscriptions', :action => 'create')
   r.match('/unsubscribe/:secret', :method => 'get'  ).to(:controller => 'Subscriptions', :action => 'unsubscribe')
 
   r.default_routes

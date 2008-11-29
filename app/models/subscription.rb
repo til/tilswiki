@@ -1,3 +1,5 @@
+require 'base62'
+
 class Subscription
   include DataMapper::Resource
 
@@ -6,7 +8,7 @@ class Subscription
 
   property :page,       String, :nullable => false
   property :secret,     String, :nullable => false, 
-                                :default => proc { Subscription.random_secret }
+                                :default => proc { Base62.rand }
   property :email,      String, :nullable => false,
                                 :format => :email_address
 
@@ -31,11 +33,4 @@ class Subscription
       end
   end
 
-  
-protected
-  def self.random_secret
-    10.times.map do
-      "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ".split('')[rand(26 + 26 + 10)]
-    end.join
-  end
 end

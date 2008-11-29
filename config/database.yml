@@ -2,10 +2,13 @@ production:
   adapter: sqlite3
   database: db/production.db
 
-development:
+development: &defaults
   adapter: sqlite3
   database: db/development.db
 
 test:
   adapter: sqlite3
   database: db/test.db
+
+rake:
+  <<: *defaults
