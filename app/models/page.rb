@@ -37,6 +37,10 @@ class Page
   def latest_version
     @new_version || versions.first(:order => [:created_at.desc])
   end
+
+  def updated_at
+    latest_version.created_at
+  end
   
 protected
 

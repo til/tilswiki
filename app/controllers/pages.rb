@@ -7,8 +7,16 @@ class Pages < Application
 
     @page = Page.first(:handle => handle) or raise DataMapper::ObjectNotFoundError
 
+    @headers['Last-modified'] = @page.updated_at.to_time.httpdate
     @headers['Cache-control'] = "no-cache"
-    render
+    if request.ajax?
+      render @page.body, :layout => false
+    else
+      render
+    end
+
+  rescue DataMapper::ObjectNotFoundError
+    raise NotFound
   end
 
   def create
