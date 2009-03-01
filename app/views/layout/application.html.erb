@@ -1,0 +1,29 @@
+<html>
+
+<head>
+
+<!-- Workaround for merb currently not adding charset to Content-Type -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<link rel="stylesheet" type="text/css" href="/stylesheets/master.css" />
+<link rel="stylesheet" type="text/css" href="/stylesheets/thickbox.css" media="screen" />
+
+<link rel="icon" href="/images/favicon.png" type="image/png" />
+
+<script src="/javascripts/jquery-1.2.6.min.js" type="text/javascript"></script>
+<script src="/javascripts/jquery.form.js" type="text/javascript"></script>
+<script src="/javascripts/thickbox-compressed.js" type="text/javascript"></script>
+<script src="/javascripts/jsdiff.js" type="text/javascript"></script>
+
+<%= catch_content :for_head %>
+
+</head>
+
+<body> 
+
+    <%= catch_content :for_layout %>
+
+<p class="footer"><a href="/">Powered by tilswiki</a></p>
+
+</body>
+</html>

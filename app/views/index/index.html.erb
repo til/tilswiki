@@ -1,0 +1,40 @@
+<html>
+
+<head>
+<!-- Workaround for merb currently not adding charset to Content-Type -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<link rel="stylesheet" type="text/css" href="/stylesheets/master.css" />
+
+<link rel="icon" href="/images/favicon.png" type="image/png" />
+
+<body id="index" 
+      onload="javascript:document.getElementById('title').focus()"> 
+
+<h1><img src="/images/logo.png" alt="tilswiki" title="na logo" /></h1>
+
+
+<div id="aux"></div>
+
+<div id="create">
+
+<%= form(:action => '/', :method => :post) do %>
+  <label for="title">New Page:</label>
+  <%= text_field :id => 'title', :name => 'title' %>
+  <%= submit 'Create', :id => 'submit' %>
+<% end =%>
+
+</div>
+
+
+<ul>
+  <li>or try it out at the <a href="/sandbox">Sandbox Page</a></li>
+  <li>more <a href="/about">about tilswiki</a></li>
+</ul>
+
+
+<p class="footer"><a href="/">Powered by tilswiki</a></p>
+
+
+</body>
+</html>

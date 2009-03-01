@@ -27,18 +27,14 @@
 
 Merb.logger.info("Compiling routes...")
 Merb::Router.prepare do
-  # RESTful routes
-  # resources :posts
-  
-  # Adds the required routes for merb-auth using the password slice
-  slice(:merb_auth_slice_password, :name_prefix => nil, :path_prefix => "")
+  match('/', :method => 'get' ).to(:controller => 'Index', :action => 'index')
+  match('/', :method => 'post').to(:controller => 'Pages', :action => 'create')
 
-  # This is the default route for /:controller/:action/:id
-  # This is fine for most cases.  If you're heavily using resource-based
-  # routes, you may want to comment/remove this line to prevent
-  # clients from calling your create or destroy actions with a GET
-  default_routes
-  
-  # Change this for your home page to be available at /
-  # match('/').to(:controller => 'whatever', :action =>'index')
+  match('/:handle', :method => 'get' ).to(:controller => 'Pages', :action => 'show')
+  match('/:handle', :method => 'put' ).to(:controller => 'Pages', :action => 'update')
+  match('/:handle', :method => 'post').to(:controller => 'Pages', :action => 'upload')
+
+  match('/:handle/subscription',  :method => 'get'  ).to(:controller => 'Subscriptions', :action => 'show')
+  match('/:handle/subscription',  :method => 'post' ).to(:controller => 'Subscriptions', :action => 'create')
+  match('/unsubscribe/:secret', :method => 'get'  ).to(:controller => 'Subscriptions', :action => 'unsubscribe')
 end
