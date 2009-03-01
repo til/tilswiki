@@ -143,14 +143,6 @@ h1,h2,h3,hr {
   cursor: move;
 }
 
-ins {
-  background: lightgreen;
-}
-
-del {
-  background: #ffaaaa;
-}
-
 
 
 /* ------------ Panel -------------- */

@@ -5,10 +5,6 @@ var $tw = function() {
   var tw = {};
   var editing = true;
 
-  tw.pageUrl = function() {
-    return '/' + document.location.toString().split('/').pop();
-  };
-
   tw.putContent = function() {
     var successCallback = function(data, textStatus) {
       // Only run the callback when no other ajax call has been started later
@@ -24,24 +20,25 @@ var $tw = function() {
     tw.rememberSavedContent();
 
     $.ajax({
-             url:     tw.pageUrl(),
-             data:    { body: tw.currentContent() },
+             url:     '/' + document.location.toString().split('/').pop(),
+             data:    { body: wysiwyg.html() },
              type:    'PUT',
              'success': successCallback
            });
   };
 
   tw.rememberSavedContent = function() {
-    tw.wysiwyg.data('content', tw.wysiwyg.html());
+    var wysiwyg = $('#wysiwyg');
+    wysiwyg.data('content', wysiwyg.html());
   };
 
   tw.putContentIfIdle = function() { };
 
   tw.putContentIfIdle = function() {
-    var last_changed_time = tw.wysiwyg.data('last_changed_time');
+    var last_changed_time = $('#wysiwyg').data('last_changed_time');
 
     if (last_changed_time && (new Date()).getTime() > last_changed_time + 1 * 1000) {
-      tw.wysiwyg.removeData('last_changed_time');
+      $('#wysiwyg').removeData('last_changed_time');
       tw.putContent();
     }
 
@@ -81,47 +78,30 @@ var $tw = function() {
   };
 
   tw.suspendEditing = function() {
-    tw.wysiwyg.attr('contenteditable', false);
+    $('#wysiwyg').attr('contenteditable', false);
     editing = false;
   };
   tw.resumeEditing = function() {
     editing = true;
-    tw.wysiwyg.attr('contenteditable', true);
+    $('#wysiwyg').attr('contenteditable', true);
     tw.checkIfDirty();
   };
 
   // Call this whenever content may have changed
   tw.checkIfDirty = function() {
+    var wysiwyg = $("#wysiwyg");
+
     if (!editing) { return; }
 
-    if (tw.wysiwyg.data('content') !== tw.wysiwyg.html()) {
-      tw.wysiwyg.data('last_changed_time', (new Date()).getTime());
+    if (wysiwyg.data('content') !== wysiwyg.html()) {
+      wysiwyg.data('last_changed_time', (new Date()).getTime());
       tw.progressUnsaved();
     }
   };
 
-  tw.pollForNewContent = function() {
-    console.log("polling");
-    $.ajax({
-      url        : tw.pageUrl(),
-      ifModified : true,
-      'success'  : function(data, status) {
-        tw.wysiwyg.html(diffString(tw.currentContent(), data));
-      }
-    });
-
-    setTimeout(tw.pollForNewContent, 5000);
-  };
-
-  tw.currentContent = function() {
-    return tw.wysiwyg.html().
-      replace('<ins>', '').replace('</ins>', '').
-      replace(/<del>.*?<\/del>/, '');
-  };
-
   tw.imageUploadSuccess = function(data) {
     $(data).find('ul li.asset').each(function() {
-      tw.wysiwyg.append($('div.image', this)).append('<br/>');
+      $('#wysiwyg').append($('div.image', this)).append('<br/>');
     });
 
     tb_remove(); // close thickbox
@@ -132,7 +112,7 @@ var $tw = function() {
   };
 
   tw.activateImageEvents = function() {
-    $('div.image', tw.wysiwyg).
+    $('#wysiwyg div.image').
       attr('contenteditable', false).
       bind('mouseenter', function() {
         var imageContainer = $(this);
@@ -153,15 +133,15 @@ var $tw = function() {
 
             var dropTarget = $('<div class="dropTarget"></div>').
               css({
-                width: tw.wysiwyg.width(),
-                left:  tw.wysiwyg.offset().left
+                width: $('#wysiwyg').width(),
+                left:  $('#wysiwyg').offset().left
               });
 
             $('body').
               css('cursor', 'move').
               append(dropTarget);
 
-            var targetElements = $('h1, h2, h3, br, div.image, p', tw.wysiwyg);
+            var targetElements = $('h1, h2, h3, br, div.image, p', $('#wysiwyg'));
             var targets = targetElements.map(function() {
               return $(this).position().top + 2;
             }).get().sort(function(a, b) { return a - b; });
@@ -297,9 +277,9 @@ var $tw = function() {
 
 
 $(function() {
-  $tw.wysiwyg = $('#wysiwyg');
+  wysiwyg = $('#wysiwyg');
 
-  $tw.wysiwyg.bind("keyup mouseup", $tw.checkIfDirty);
+  wysiwyg.bind("keyup mouseup", $tw.checkIfDirty);
 
   // Preload progress indicator images
   var preloaded_images = { loader: $('<img />').attr('src', "/images/ajax-loader.gif"),
@@ -364,5 +344,4 @@ $(function() {
 
   $tw.activateImageEvents();
 
-  $tw.pollForNewContent();
 });

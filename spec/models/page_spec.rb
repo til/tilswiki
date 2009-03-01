@@ -54,12 +54,5 @@ describe Page do
 
     @page.versions.size.should == 2
   end
-  
-  it "returns latest versions created_at for updated_at" do
-    @page.save
-    
-    @page.updated_at.should_not be_nil
-    @page.updated_at.should == @page.latest_version.created_at
-  end
 end
 

@@ -5,5 +5,17 @@
       Fresh Merb App
     %meta{ :content => "text/html; charset=utf-8", "http-equiv" => "content-type" }/
     %link{ :href => "/stylesheets/master.css", :rel => "stylesheet", :media => "screen", :type => "text/css", :charset => "utf-8" }/
+    %link{ :href => "/stylesheets/thickbox.css", :media => "screen", :type => "text/css", :charset => "utf-8" }/
+    %link{ :rel => "icon", :href => "/images/favicon.png", :type => "image/png" }/
+
+    %script{ :src => "/javascripts/jquery-1.2.6.min.js",    :type => "text/javascript" }
+    %script{ :src => "/javascripts/jquery.form.js",         :type => "text/javascript" }
+    %script{ :src => "/javascripts/thickbox-compressed.js", :type => "text/javascript" }
+
+    = catch_content :for_head
+
   %body
     = catch_content :for_layout
+
+    %p.footer
+      %a{ :href => "/"} Powered by tilswiki
