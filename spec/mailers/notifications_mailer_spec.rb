@@ -31,7 +31,7 @@ describe NotificationsMailer, "#notify_on_event email template" do
   end
     
   it "includes welcome phrase in email text" do
-    violated "Mailer controller deserves to have specs, too."
+    pending "Mailer controller deserves to have specs, too."
     
     # NotificationsMailer.dispatch_and_deliver(:notify_on_event, {}, { :name => "merb-mailer user" })
     # last_delivered_mail.text.should =~ /Hello, merb-mailer user!/

@@ -18,7 +18,7 @@ describe Asset, "creation from uploaded tempfile" do
   end
 
   after do
-    Asset.delete_all(@page)
+    #Asset.delete_all(@page)
   end
 
   it "should create the storage dir" do
@@ -35,8 +35,8 @@ describe Asset, "creation from uploaded tempfile" do
 
   it "should resize thumbnail and keep aspect ratio" do
     thumb = Magick::Image.read(@storage_dir / 'panzer.thumbnail.jpg').first
-    thumb.columns.should == 64
-    thumb.rows.should == 48
+    thumb.columns.should == 100
+    thumb.rows.should == 75
   end
 
   it "should create a small version" do
@@ -48,11 +48,12 @@ describe Asset, "creation from uploaded tempfile" do
   end
 
   it "should have a list of all versions with paths" do
-    @asset.version_paths.map(&:first).should == ['thumbnail', 'small', 'medium', 'original']
-    @asset.version_paths.map(&:last).should  == [
+    @asset.versions.map(&:first).should == ['thumbnail', 'small', 'medium', 'large', 'original']
+    @asset.versions.map { |v| v[1] }.should  == [
       '/assets/asset_spec/panzer.thumbnail.jpg',
       '/assets/asset_spec/panzer.small.jpg',
       '/assets/asset_spec/panzer.medium.jpg',
+      '/assets/asset_spec/panzer.large.jpg',
       '/assets/asset_spec/panzer.jpg'
     ]
   end
