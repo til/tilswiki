@@ -57,7 +57,7 @@ describe Page do
 end
 
 
-describe Page, "move" do
+describe Page, "relocate" do
   before do
     Page.all.each(&:destroy)
     @page = Page.new; @page.save
@@ -69,26 +69,26 @@ describe Page, "move" do
   end
 
   it "returns true when successful" do
-    @page.move('def').should be_true
+    @page.relocate('def').should be_true
   end
 
   it "sets the new handle" do 
-    @page.move('def')
+    @page.relocate('def')
     @page.reload.handle.should  == 'def'
   end
 
   it "stores the old handle" do
-    @page.move('def')
+    @page.relocate('def')
 
     @page.old_handles.map(&:to_s).should include(@handle)
   end
 
   it "returns false when handle taken by other page" do
-    @page.move(@other.handle).should be_false
+    @page.relocate(@other.handle).should be_false
   end
 
   it "returns false when handle is taken by other old handle" do
-    @page.move("old_other").should be_false
+    @page.relocate("old_other").should be_false
   end
 end
 

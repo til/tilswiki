@@ -29,7 +29,7 @@ Merb.logger.info("Compiling routes...")
 Merb::Router.prepare do
   match('/', :method => 'get' ).to(:controller => 'Index', :action => 'index')
   match('/', :method => 'post').to(:controller => 'Pages', :action => 'create')
-  match('/', :method => 'put').to(:controller => 'Pages', :action => 'move')
+  match('/', :method => 'put').to(:controller => 'Pages', :action => 'relocate')
 
   match('/:handle', :method => 'get' ).to(:controller => 'Pages', :action => 'show')
   match('/:handle', :method => 'put' ).to(:controller => 'Pages', :action => 'update')

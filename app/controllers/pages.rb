@@ -29,10 +29,10 @@ class Pages < Application
     render "Updated"
   end
 
-  def move(handle, new_handle)
+  def relocate(handle, new_handle)
     @page = Page.get_by_handle!(handle)
     
-    if @page.move(new_handle)
+    if @page.relocate(new_handle)
       redirect "/" / @page.reload.handle
     else
       render "Sorry, this name is already in use", :status => 409 # Conflict

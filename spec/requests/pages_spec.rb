@@ -11,7 +11,7 @@ describe Pages, "upload action" do
 end
 
 
-describe Pages, "move" do
+describe Pages, "relocate" do
   before do
     @page = Page.new
     @page.save
@@ -24,10 +24,10 @@ describe Pages, "move" do
     @response.should redirect_to('/def')
   end
   
-  it "moves the page" do
+  it "relocates the page" do
     Page.stub!(:get_by_handle!).and_return(@page)
 
-    @page.should_receive(:move).with('def')
+    @page.should_receive(:relocate).with('def')
 
     @response = request('/', :method => 'PUT', :params => { :handle => @handle, :new_handle => 'def' })
   end

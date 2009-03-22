@@ -31,7 +31,7 @@ class Page
     end
   end
   
-  def move(new_handle)
+  def relocate(new_handle)
     return false if OldHandle.first(:name => new_handle)
     return false if Page.first(:handle => new_handle)
 
