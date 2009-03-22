@@ -3,7 +3,7 @@
 development: &defaults
   # These are the settings for repository :default
   adapter:  sqlite3
-  database: development.db
+  database: db/development.db
  
   # Add more repositories
   # repositories:

@@ -4,3 +4,5 @@ log
 
 gems/gems
 gems/specifications
+
+db/development.db
