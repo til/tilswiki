@@ -36,3 +36,5 @@ dependency "merb_datamapper", merb_gems_version
 dependency "mongrel"
 dependency "rmagick", :require_as => "RMagick.rb"
 dependency "webrat"
+
+dependency "activesupport"
