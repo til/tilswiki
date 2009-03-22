@@ -247,6 +247,20 @@ ul.panel li a.empty { background-position: -64px -80px; }
   visibility: hidden;
 }
 
+/* ----------- change URL form ------------- */
+#changeURL {
+  visibility: hidden;
+}
+
+.url {
+  color: green;
+}
+
+.url em {
+  font-weight: bold;
+  font-style: normal;
+}
+
 
 /* ------------ Footer -------------- */
 

@@ -38,3 +38,4 @@ dependency "rmagick", :require_as => "RMagick.rb"
 dependency "webrat"
 
 dependency "activesupport"
+dependency "andand"

@@ -10,8 +10,13 @@ class Page
                             :default => proc { Base62.rand }
   
   has n, :versions
+  has n, :old_handles
 
   after :save, :save_new_version
+
+  def self.get_by_handle!(handle)
+    first(:handle => handle) or raise DataMapper::ObjectNotFoundError
+  end
 
   def initialize
     new_version
@@ -22,6 +27,15 @@ class Page
     "A Title"
   end
   
+  def move(new_handle)
+    return false if OldHandle.first(:name => new_handle)
+    return false if Page.first(:handle => new_handle)
+
+    old_handles.create(:name => self.handle)
+    self.handle = new_handle
+    save
+  end
+
   def body
     latest_version.body
   end

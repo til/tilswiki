@@ -330,7 +330,7 @@ $(function() {
   $tw.rememberSavedContent();
   $tw.putContentIfIdle();
 
-  $('#imageUpload a.cancel').click(function() {
+  $('a.cancel').click(function() {
     tb_remove();
     return false;
   });

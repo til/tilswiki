@@ -56,3 +56,38 @@ describe Page do
   end
 end
 
+
+describe Page, "move" do
+  before do
+    Page.all.each(&:destroy)
+    @page = Page.new; @page.save
+    
+    @other = Page.new; @other.save
+    @other.old_handles.create(:name => 'old_other')
+
+    @handle = @page.handle.dup
+  end
+
+  it "returns true when successful" do
+    @page.move('def').should be_true
+  end
+
+  it "sets the new handle" do 
+    @page.move('def')
+    @page.reload.handle.should  == 'def'
+  end
+
+  it "stores the old handle" do
+    @page.move('def')
+
+    @page.old_handles.map(&:to_s).should include(@handle)
+  end
+
+  it "returns false when handle taken by other page" do
+    @page.move(@other.handle).should be_false
+  end
+
+  it "returns false when handle is taken by other old handle" do
+    @page.move("old_other").should be_false
+  end
+end
