@@ -91,3 +91,28 @@ describe Page, "move" do
     @page.move("old_other").should be_false
   end
 end
+
+
+describe Page, "title" do
+  
+  it "is derived from the first h1 element of body" do
+    @page = Page.new
+    @page.body = <<-HTML
+      fluff
+      <h1>My 
+          birthday
+      </h1>
+      more fluff
+      <h1>a good party</h1>
+      foo
+    HTML
+    
+    @page.title.should == "My birthday"
+  end
+  
+  it "has a default when no h1 in body" do
+    @page = Page.new
+
+    @page.title.should == "A tilswiki page"
+  end
+end

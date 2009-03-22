@@ -24,7 +24,11 @@ class Page
   end
 
   def title
-    "A Title"
+    if body =~ %r{<h1>(.*?)</h1>}im
+      $1.gsub(/\s+/, ' ').strip
+    else
+      "A tilswiki page"
+    end
   end
   
   def move(new_handle)
