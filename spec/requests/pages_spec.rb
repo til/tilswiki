@@ -50,3 +50,18 @@ describe Pages, "requesting an old page" do
     @response.status.should == 301
   end
 end
+
+
+describe Pages, "new URL suggestion" do
+  before do
+    @page = Page.new; @page.body = "<h1>My cool car</h1>"; @page.save
+
+    @response = dispatch_to(Pages, :show, :handle => @page.handle)
+  end
+
+  it "uses title of page" do
+    @response.should have_tag("input[name=new_handle]") do |input|
+      input.to_s.should match(/value="my_cool_car"/)
+    end
+  end
+end

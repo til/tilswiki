@@ -58,7 +58,7 @@
     %p
       %span.url http://wiki.tils.net/
       = hidden_field :name => 'handle', :value => params[:handle]
-      = text_field :name => 'new_handle'
+      = text_field :name => 'new_handle', :value => @page.title.gsub(/[^\w]+/, '_').downcase
     %p.help
       Don't worry: the old URL will be remembered, and it will redirect to the new URL.
     %p
