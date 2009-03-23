@@ -47,6 +47,10 @@ class Pages < Application
     render :status => 201
   end
   
+  def insert_link
+    render :layout => false
+  end
+
 protected
   def redirect_from_old_handle
     puts "redirect_from_old_handle #{params[:handle]} #{Page.count}"

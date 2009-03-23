@@ -145,7 +145,6 @@ var $tw = function() {
             var targets = targetElements.map(function() {
               return $(this).position().top + 2;
             }).get().sort(function(a, b) { return a - b; });
-            //console.log("targets: " + targets);
 
             $(document).
               mousemove(function(mouseEvent) {
@@ -272,6 +271,15 @@ var $tw = function() {
       });
   };
 
+  tw.activateLinkEvents = function() {
+    $("#wysiwyg a").click(function() {
+      window.location = $(this).attr('href');
+      return false;
+    });
+    // I'd like to also set cursor of the a element to pointer,
+    // but it seems to have no effect
+  };
+
   return tw;
 }();
 
@@ -343,5 +351,5 @@ $(function() {
   });
 
   $tw.activateImageEvents();
-
+  $tw.activateLinkEvents();
 });

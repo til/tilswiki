@@ -35,6 +35,8 @@ Merb::Router.prepare do
   match('/:handle', :method => 'put' ).to(:controller => 'Pages', :action => 'update')
   match('/:handle', :method => 'post').to(:controller => 'Pages', :action => 'upload')
 
+  match('/:handle/insert_link', :method => 'get' ).to(:controller => 'Pages', :action => 'insert_link')
+
   match('/:handle/subscription',  :method => 'get'  ).to(:controller => 'Subscriptions', :action => 'show')
   match('/:handle/subscription',  :method => 'post' ).to(:controller => 'Subscriptions', :action => 'create')
   match('/unsubscribe/:secret', :method => 'get'  ).to(:controller => 'Subscriptions', :action => 'unsubscribe')

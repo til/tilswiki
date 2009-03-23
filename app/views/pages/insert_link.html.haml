@@ -1,0 +1,30 @@
+%html
+  %head
+    %link{ :href => "/stylesheets/master.css", :rel => "stylesheet", :media => "screen", :type => "text/css", :charset => "utf-8" }/
+    %script{ :src => "/javascripts/jquery-1.3.2.min.js",    :type => "text/javascript" }
+    :javascript
+      $(function() {
+        $('#insertLink form').submit(function() {
+          self.parent.document.execCommand('insertHTML', false, '\n<a href="'+ $('input', this).val() + '">' + $('input', this).val() + '</a>\n');
+          self.parent.tb_remove();
+          return false;
+        });
+
+        $('a.cancel').click(function() {
+          self.parent.tb_remove();
+          return false;
+        });
+
+        $('#insertLink input');
+      });
+  %body
+    #insertLink
+      = form :action => '/' do
+        %p
+          %label{:for => 'insertLinkURL'} URL
+          %input#insertLinkURL{:size => 50}
+        %p.help
+          For example <em>http://twitter.com/til</em>
+        %p
+          = submit 'OK'
+          %a.cancel{:href=>"#"} Cancel
