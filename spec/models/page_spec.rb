@@ -112,6 +112,7 @@ describe Page, "title" do
   
   it "has a default when no h1 in body" do
     @page = Page.new
+    @page.body = "nothing"
 
     @page.title.should == "A tilswiki page"
   end

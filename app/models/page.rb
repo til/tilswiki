@@ -20,7 +20,10 @@ class Page
 
   def initialize
     new_version
-    self.body = "foo"
+    self.body = <<-HTML
+      <h1>The title goes here</h1>
+      <p>And here is some text ...</p>
+    HTML
   end
 
   def title
