@@ -1,7 +1,7 @@
 <script type="text/javascript">
 $(function() {
   $('#subscription').ajaxForm({
-    url : '<%= '/' / @page / 'subscription' %>',
+    url : '<%= '/' / @page.handle / 'subscription' %>',
     success : tb_remove
   });
 
@@ -14,9 +14,9 @@ $(function() {
 
 
 
-<p>Notify me by email whenever someone updated <strong><%= @page %></strong>.</p>
+<p>Notify me by email whenever someone updated <q><%= @page.title %></q>.</p>
 
-<%= form(:action => '/' / @page / 'subscription', :method => 'post', :id => 'subscription') do %>
+<%= form(:action => '/' / @page.handle / 'subscription', :method => 'post', :id => 'subscription') do %>
 
   <label for="email">Email Address</label>
   <%= text_field :id => 'email', :name => 'email' %>
@@ -24,4 +24,4 @@ $(function() {
   <a href="#" class="cancel">Cancel</a>
 <% end =%>
 
-<p class="help">Don't worry, every notification email will have an unsubscribe link.</p>
+<p class="help">Don't worry: every notification email will have an unsubscribe link.</p>

@@ -1,12 +1,13 @@
 class Subscriptions < Application
 
   def show
-    @page = params[:page]
+    @page = Page.get_by_handle!(params[:handle])
     render :template => 'subscriptions/new', :layout => false
   end
   
   def create
-    @subscription = Subscription.new(:email => params[:email], :page => params[:page])
+    @page = Page.get_by_handle!(params[:handle])
+    @subscription = Subscription.new(:email => params[:email], :page => @page)
     
     @subscription.save!
 
