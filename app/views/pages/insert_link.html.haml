@@ -14,8 +14,10 @@
           self.parent.tb_remove();
           return false;
         });
-
-        $('#insertLink input');
+        // No idea why, but setting the focus only works in a timeout
+        setTimeout(function() {
+          $('#insertLink input').get(0).focus();
+        }, 500);
       });
   %body
     #insertLink
