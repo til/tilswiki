@@ -53,7 +53,6 @@ class Pages < Application
 
 protected
   def redirect_from_old_handle
-    puts "redirect_from_old_handle #{params[:handle]} #{Page.count}"
     OldHandle.first(:name => params[:handle]).andand do |old_handle|
       redirect "/" / old_handle.page.handle, :permanent => true
       throw :halt
