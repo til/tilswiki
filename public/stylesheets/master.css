@@ -1,63 +1,40 @@
 /* --------- front page -------- */
 
-body#index {
-  padding: 0;
-  margin: 0;
-}
-
 body#index h1 {
-  margin-top: 1em;
-  margin-bottom: 1em;
-  margin-left: 2em;
+  margin-top: 3em;
+  margin-bottom: 2em;
+  margin-left: 20px;
 }
 
-#aux {
-  background: green;
-  width: 100%;
-  height: 9px;
+body#index p, body#index form {
+  margin-left: 120px;
+  width: 40em;
 }
 
-#create {
-  border-top: 3px solid red;
-  border-bottom: 9px solid blue;
-  width: 100%;
-  height: 8em;
-}
-
-#create form {
-  width: 31em;
-  margin-left: auto;
-  margin-right: auto;
-  padding-top: 3em;
-}
-
-#create label, #create input {
-  font-size: 1.5em;
-  float: left;
-  margin: 0.1em;
-}
-
-#create input#title {
-  width: 10em;
+body#index form {
+  margin-top: 5em;
+  margin-bottom: 5em;
 }
 
 body#index ul {
-  text-align: right;
-  margin-top: 4em;
-  padding-right: 2em;
+  margin-left: 135px;
+  list-style-type: square;
+  padding: 0;
 }
 
 body#index li {
-  list-style-type: none;
-  margin-top: 1em;
-  font-size: 1.5em;
+  margin-top: 0.5em;
 }
 
+body#index input {
+  width: 300px;
+  height: 50px;
+  font-weight: bold;
+  font-size: 120%;
+}
 body#index p.footer {
-  position: absolute;
-  bottom: 2em;
+  margin: 0;
 }
-
 
 /* --------- content page -------- */
 
@@ -263,12 +240,9 @@ ul.panel li a.empty { background-position: -64px -80px; }
 
 
 /* ------------ Footer -------------- */
-
 p.footer {
-  width: 95%;
-  text-align: center;
-  margin: 0;
-  padding: 0;
+  position: absolute;
+  bottom: 2em;
 }
 p.footer, p.footer a {
   font-size: 0.8em;

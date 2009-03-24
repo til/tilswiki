@@ -12,7 +12,7 @@
 
     = catch_content :for_head
 
-  %body
+  %body{:id=> catch_content(:page_id) || 'body'}
     = catch_content :for_layout
 
     %p.footer

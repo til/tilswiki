@@ -1,13 +1,31 @@
+- throw_content(:page_id) do
+  index
+
 - throw_content(:for_head) do
   %title tilswiki
 
+
+
 %h1
   %img{:src=>"/images/logo.png", :alt=>"tilswiki", :title=>"tilswiki"}
+
+%p
+  On tilswiki you can create simple pages, edit the text,
+  change the formatting, upload images, and share the pages with
+  others. Clicking the button below produces a new page that you
+  can immediately edit.
 
 %form{:action => '/', :method => :post}
   %input{:type=>"submit", :value=>"Create a New Page"}
 
 %ul
-  %li or try it out at the <a href="/sandbox">Sandbox Page</a></li>
-  %li read more <a href="/about">about tilswiki</a></li>
-
+  %li 
+    %a{:href=>"/sandbox"} Sandbox
+    \: an existing page to try it out
+  %li 
+    %a{:href=>"/about"} More about tilswiki
+  %li 
+    tilswiki is open source under the
+    %a{:href=>"/agpl.txt"} AGPL license
+    and hosted at
+    %a{:href=>"http://github.com/til/tilswiki/tree"} github
