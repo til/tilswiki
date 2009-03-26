@@ -21,8 +21,8 @@ class Page
   def initialize
     new_version
     self.body = <<-HTML
-      <h1>A Title</h1>
-      <p>And here is some text ...</p>
+      <h1>Page Title</h1>
+      <p>Type your text here ...</p>
     HTML
   end
 
