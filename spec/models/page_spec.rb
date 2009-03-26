@@ -116,4 +116,17 @@ describe Page, "title" do
 
     @page.title.should == "A tilswiki page"
   end
+
+  it "has a different default than the default body" do
+    @page = Page.new
+
+    @page.title.should == "A tilswiki page"
+  end
+
+  it "removes html" do
+    @page = Page.new
+    @page.body = "<h1>Foo <font style='color: red;'>Bar</font>  </h1>"
+
+    @page.title.should == "Foo Bar"
+  end
 end

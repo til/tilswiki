@@ -27,11 +27,14 @@ class Page
   end
 
   def title
+    title = nil
     if body =~ %r{<h1>(.*?)</h1>}im
-      $1.gsub(/\s+/, ' ').strip
-    else
-      "A tilswiki page"
+      title = Nokogiri::HTML($1).text.gsub(/\s+/, ' ').strip
     end
+    
+    title = nil if title == "Page Title"
+
+    title || "A tilswiki page"
   end
   
   def relocate(new_handle)
