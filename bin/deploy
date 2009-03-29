@@ -2,4 +2,8 @@
 
 git push
 
-ssh tils.net "cd /web/tilswiki && git reset --hard && bin/thor merb:gem:redeploy && bin/rake db:autoupgrade && bin/run"
+ssh tils.net "cd /web/tilswiki                      && \
+              export LD_LIBRARY_PATH=/usr/local/lib && \
+              git reset --hard                      && \
+              bin/thor merb:gem:redeploy            && \
+              bin/rake db:autoupgrade && bin/run"
