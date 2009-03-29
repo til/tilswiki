@@ -1,0 +1,5 @@
+#!/bin/sh
+
+git push
+
+ssh tils.net "cd /web/tilswiki && bin/deploy_local"
