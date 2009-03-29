@@ -1,0 +1,11 @@
+#!/bin/sh
+
+export LD_LIBRARY_PATH=/usr/local/lib
+
+echo "Starting tilswiki ..."
+
+kill `cat log/merb.4000.pid` 2> /dev/null
+sleep 2
+bin/merb -p 4000 -a thin < /dev/null > nohup.out 2>&1 &
+
+echo "Done."

@@ -2,4 +2,4 @@
 
 git push
 
-ssh tils.net "cd /web/tilswiki && bin/deploy_local"
+ssh tils.net "cd /web/tilswiki && git reset --hard && bin/thor merb:gem:redeploy && bin/rake db:autoupgrade && bin/run"
