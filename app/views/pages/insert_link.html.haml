@@ -5,7 +5,13 @@
     :javascript
       $(function() {
         $('#insertLink form').submit(function() {
-          self.parent.document.execCommand('insertHTML', false, '\n<a href="'+ $('input', this).val() + '">' + $('input', this).val() + '</a>\n');
+          
+          /* Append &nbsp;, otherwise when the link is at the end and
+             the user clicks into the wysiwyg div, the cursor is inside
+             the link */
+          self.parent.document.execCommand('insertHTML', 
+                                           false,
+                                           '\n<a href="'+ $('input', this).val() + '">' + $('input', this).val() + '</a> &nbsp; ');
           self.parent.tb_remove();
           return false;
         });
