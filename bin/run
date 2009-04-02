@@ -1,6 +1,7 @@
 #!/bin/sh
 
 export LD_LIBRARY_PATH=/usr/local/lib
+export MERB_ENV=production
 
 echo "Starting tilswiki ..."
 
