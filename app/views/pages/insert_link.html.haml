@@ -12,6 +12,8 @@
           self.parent.document.execCommand('insertHTML', 
                                            false,
                                            '\n<a href="'+ $('input', this).val() + '">' + $('input', this).val() + '</a> &nbsp; ');
+          self.parent.$tw.activateLinkEvents();
+          self.parent.$tw.checkIfDirty();
           self.parent.tb_remove();
           return false;
         });

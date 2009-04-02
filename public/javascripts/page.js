@@ -272,12 +272,13 @@ var $tw = function() {
   };
 
   tw.activateLinkEvents = function() {
-    $("#wysiwyg a").click(function() {
-      window.location = $(this).attr('href');
-      return false;
-    });
-    // I'd like to also set cursor of the a element to pointer,
-    // but it seems to have no effect
+    $("#wysiwyg a").
+      click(function() {
+        window.location = $(this).attr('href');
+        return false;
+      }).hover(
+        function() { tw.suspendEditing(); },  // The only way to get a cursor hand
+        function() { tw.resumeEditing(); } ); // on link hovering, it seems
   };
 
   return tw;
