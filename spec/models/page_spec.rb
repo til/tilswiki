@@ -56,6 +56,18 @@ describe Page do
   end
 end
 
+describe Page, "create" do
+  before do
+    pending "Refactor page versioning so that new works again"
+    @page = Page.create :body => 'abc', :handle => 'zacke'
+  end
+  
+  it "can set body and handle" do
+    @page.body.should   == 'abc'
+    @page.handle.should == 'zacke'
+  end
+end
+
 
 describe Page, "relocate" do
   before do
