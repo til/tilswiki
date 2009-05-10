@@ -31,10 +31,10 @@
     %li.break
       %a.subscription.thickbox{:rel=>'nofollow', :href => "#{'/' / params[:handle] / 'subscription'}?height=300&width=400", :title => "Subscribe to update notifications by Email" }
     %li.break
-      %a.thickbox{:href=> '/' + params[:handle] + '/insert_link?TB_iframe=true&height=200&width=500', :title=>'Insert a Link'} insert Link
+      %a.createLink.thickbox{:href=> '/' + params[:handle] + '/insert_link?TB_iframe=true&height=200&width=500', :title=>'Insert a Link'} insert Link
       %br
     %li.break
-      %a.thickbox{:href=>'#TB_inline?height=300&width=300&inlineId=changeURL', :title=>'Change the URL of this page'} change URL
+      %a.changeURL.thickbox{:href=>'#TB_inline?height=300&width=300&inlineId=changeURL', :title=>'Change the URL of this page'} change URL
 
   %p.progress
 

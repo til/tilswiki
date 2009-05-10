@@ -208,7 +208,6 @@ ul.panel li a.paste { background-position: -64px -64px; }
 ul.panel li a.increaseFontSize { background-position: -16px -80px; }
 ul.panel li a.decreaseFontSize { background-position: -32px -80px; }
 
-ul.panel li a.createLink { background-position: -80px -48px; }
 ul.panel li a.subscription { background-position: -48px -80px; }
 ul.panel li a.insertImage { background-position: -80px -80px; }
 
@@ -216,6 +215,9 @@ ul.panel li a.html { background-position: -48px -48px; }
 ul.panel li a.removeFormat { background-position: -80px -64px; }
 
 ul.panel li a.empty { background-position: -64px -80px; }
+
+ul.panel li a.createLink, ul.panel li a.changeURL { background: none; font-size: small; color: black; }
+
 
 /* ----------- Image Upload Form ----------- */
 #imageUpload {
