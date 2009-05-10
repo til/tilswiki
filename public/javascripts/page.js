@@ -299,22 +299,22 @@ $(function() {
      'increaseFontSize', 'decreaseFontSize'],
     function() {
       var cmd = this.toString();
-      $('.panel a.' + cmd).mousedown(function() {
+      $('.panel a.' + cmd).click(function() {
         document.execCommand(cmd, false, []);
         return false;
       });
     }
   );
 
-  $('.panel a.colorRed').mousedown(function() {
+  $('.panel a.colorRed').click(function() {
     document.execCommand('forecolor', false, '#ff1111');
     return false;
   });
-  $('.panel a.colorGreen').mousedown(function() {
+  $('.panel a.colorGreen').click(function() {
     document.execCommand('forecolor', false, '#00aa00');
     return false;
   });
-  $('.panel a.colorBlue').mousedown(function() {
+  $('.panel a.colorBlue').click(function() {
     document.execCommand('forecolor', false, '#1111ff');
     return false;
   });
@@ -322,10 +322,10 @@ $(function() {
   // Bind heading commands. To support non-firefox, this should
   // call "formatBlock Heading 1" instead
   $.each(
-    ['h1', 'h2', 'h3'],
+    ['h1', 'h2'],
     function() {
       var cmd = this.toString();
-      $('.panel a.' + cmd).mousedown(function() {
+      $('.panel a.' + cmd).click(function() {
         document.execCommand('heading', false, cmd);
         return false;
       });

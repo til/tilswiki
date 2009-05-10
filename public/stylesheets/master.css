@@ -93,6 +93,11 @@ h1,h2,hr {
   clear: both;
 }
 
+hr {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
 
 .help {
   color: grey;
@@ -146,11 +151,8 @@ div.panel {
   height: 300px;
   top: 20px;
   left: 840px;
-
   border: 1px dashed grey;
-
   background-color: #fbfaf4;
-
   padding: 0 0 4px 4px;
 }
 
@@ -187,7 +189,7 @@ div.panel .progress span.unsaved {
 ul.panel li { list-style-type: none; float: left; margin: 0 2px; }
 ul.panel li.break { clear: both; }
 ul.panel li a { 
-  border: 1px solid #efefef;
+  border: 3px solid #fbfaf4;
   display: block;
   width: 16px;
   height: 16px;
@@ -195,8 +197,8 @@ ul.panel li a {
   cursor: pointer;
   padding: 1px;
 }
-ul.panel li a:hover, ul.panel li a.active { border: 1px solid grey; }
-ul.panel li a.active { background-color: #f9f9f9; border: 1px solid #ccc; border-left-color: #AAA; border-top-color: #AAA; padding: 0; }
+ul.panel li a:hover, ul.panel li a.active { border: outset grey; }
+ul.panel li a:active { border: inset grey; }
 
 ul.panel li a.bold { background-position: 0 -16px; }
 ul.panel li a.italic { background-position: -16px -16px; }
