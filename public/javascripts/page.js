@@ -299,22 +299,22 @@ $(function() {
      'increaseFontSize', 'decreaseFontSize'],
     function() {
       var cmd = this.toString();
-      $('.panel a.' + cmd).click(function() {
+      $('#panel_' + cmd).click(function() {
         document.execCommand(cmd, false, []);
         return false;
       });
     }
   );
 
-  $('.panel a.colorRed').click(function() {
+  $('#panel_colorRed').click(function() {
     document.execCommand('forecolor', false, '#ff1111');
     return false;
   });
-  $('.panel a.colorGreen').click(function() {
+  $('#panel_colorGreen').click(function() {
     document.execCommand('forecolor', false, '#00aa00');
     return false;
   });
-  $('.panel a.colorBlue').click(function() {
+  $('#panel_colorBlue').click(function() {
     document.execCommand('forecolor', false, '#1111ff');
     return false;
   });
@@ -325,14 +325,14 @@ $(function() {
     ['h1', 'h2'],
     function() {
       var cmd = this.toString();
-      $('.panel a.' + cmd).click(function() {
+      $('#panel_' + cmd).click(function() {
         document.execCommand('heading', false, cmd);
         return false;
       });
     }
   );
 
-  $('.panel a').mousedown($tw.checkIfDirty);
+  $('#panel a').mousedown($tw.checkIfDirty);
 
   $('#imageUpload form').ajaxForm({ dataType: 'xml', success: $tw.imageUploadSuccess });
 

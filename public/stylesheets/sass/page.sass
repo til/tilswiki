@@ -36,18 +36,9 @@
       :color darkred
 
 #panel
-  :list-style-type none
-  :float left
-  :margin 0 2px
 
   a
     :border 3px solid #fbfaf4
-    :display block
-    :width 16px
-    :height 16px
-    :background url('/images/controls.png') no-repeat -64px -80px
-    :cursor pointer
-    :padding 1px
 
     &:hover, &.active
       :border outset grey
@@ -55,106 +46,75 @@
     &:active
       :border inset grey
 
-    &.bold
+  ul
+    :padding 0
+    :margin 0
+    :clear both
+
+    li
+      :float left
+      :list-style none
+
+    a
+      :background transparent url('/images/controls.png') no-repeat scroll -64px -80px
+      :display block
+      :width 16px
+      :height 16px
+
+    #panel_bold a
       :background-position 0 -16px
-
-    &.italic
+    #panel_italic a
       :background-position -16px -16px
-
-    &.colorRed
+    #panel_colorRed a
       :background-position -48px -16px
-
-    &.colorGreen
+    #panel_colorGreen a
       :background-position -64px -16px
-
-    &.colorBlue
+    #panel_colorBlue a
       :background-position -80px -16px
-
-    &.justifyLeft
-      :background-position 0 0
-
-    &.justifyCenter
-      :background-position -16px 0
-
-    &.justifyRight
-      :background-position -32px 0
-
-    &.justifyFull
-      :background-position -48px 0
-
-    &.indent
-      :background-position -64px 0
-
-    &.outdent
-      :background-position -80px 0
-
-    &.subscript
-      :background-position -64px -16px
-
-    &.superscript
-      :background-position -80px -16px
-
-    &.undo
+    #panel_undo a
       :background-position 0 -64px
-
-    &.redo
+    #panel_redo a
       :background-position -16px -64px
-
-    &.insertOrderedList
+    #panel_insertOrderedList a
       :background-position -32px -48px
-
-    &.insertUnorderedList
+    #panel_insertUnorderedList a
       :background-position -16px -48px
-
-    &.insertHorizontalRule
+    #panel_insertHorizontalRule a
       :background-position 0 -48px
-
-    &.h1
+    #panel_h1 a
       :background-position 0 -32px
-
-    &.h2
+    #panel_h2 a
       :background-position -16px -32px
-
-    &.h4
-      :background-position -48px -32px
-
-    &.h5
-      :background-position -64px -32px
-
-    &.h6
-      :background-position -80px -32px
-
-    &.cut
+    #panel_cut a
       :background-position -32px -64px
-
-    &.copy
+    #panel_copy a
       :background-position -48px -64px
-
-    &.paste
+    #panel_paste a
       :background-position -64px -64px
-
-    &.increaseFontSize
+    #panel_increaseFontSize a
       :background-position -16px -80px
-
-    &.decreaseFontSize
+    #panel_decreaseFontSize a
       :background-position -32px -80px
-
-    &.subscription
+    #panel_subscription a
       :background-position -48px -80px
-
-    &.insertImage
+    #panel_insertImage a
       :background-position -80px -80px
-
-    &.html
+    #panel_html a
       :background-position -48px -48px
-
-    &.removeFormat
+    #panel_removeFormat a
       :background-position -80px -64px
-
-    &.empty
+    #panel_empty a
       :background-position -64px -80px
 
-    &.createLink, &.changeURL
-      :background none
+  ol
+    :padding 0
+    :list-style none
+    :clear both
+    li
+      :width 100%
+      :padding-top 2px
+      :padding-bottom 2px
+    a
+      :width 100%
       :font-size small
       :color black
