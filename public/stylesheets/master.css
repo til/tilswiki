@@ -40,7 +40,7 @@ body {
   padding-top: 0;
   margin-top: 0;
   margin-left: 20px;
-  background-color: lightgrey;
+  background-color: #f8f7ef;
 }
 
 #wysiwyg {
@@ -147,9 +147,9 @@ div.panel {
   top: 20px;
   left: 840px;
 
-  border: 1px solid grey;
+  border: 1px dashed grey;
 
-  background-color: #efefef;
+  background-color: #fbfaf4;
 
   padding: 0 0 4px 4px;
 }
