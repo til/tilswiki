@@ -17,6 +17,7 @@ dependency "merb-helpers", merb_gems_version
 dependency "merb-mailer", merb_gems_version  
 dependency "merb-param-protection", merb_gems_version
 dependency "merb-exceptions", merb_gems_version
+dependency "merb-haml", merb_gems_version
 
 dependency "data_objects", do_gems_version
 dependency "do_sqlite3", do_gems_version # If using another database, replace this

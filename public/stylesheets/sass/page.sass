@@ -1,0 +1,160 @@
+#panel
+  :position fixed
+  :width 120px
+  :height 300px
+  :top 20px
+  :left 840px
+  :border 1px dashed grey
+  :background-color #fbfaf4
+  :padding 0 0 4px 4px
+
+  h1
+    :font-size 0.8em
+    :font-weight normal
+    :font-style italic
+    :color grey
+
+  ul
+    :position relative
+    :padding 0
+    :margin-top 10px
+
+  .progress
+    :position absolute
+    :bottom 0px
+    :width 100%
+    :margin 0
+    :font-size small
+    :color grey
+
+    img
+      :float left
+      :border none
+      :margin-right 3px
+
+    .unsaved
+      :color darkred
+
+#panel
+  :list-style-type none
+  :float left
+  :margin 0 2px
+
+  a
+    :border 3px solid #fbfaf4
+    :display block
+    :width 16px
+    :height 16px
+    :background url('/images/controls.png') no-repeat -64px -80px
+    :cursor pointer
+    :padding 1px
+
+    &:hover, &.active
+      :border outset grey
+
+    &:active
+      :border inset grey
+
+    &.bold
+      :background-position 0 -16px
+
+    &.italic
+      :background-position -16px -16px
+
+    &.colorRed
+      :background-position -48px -16px
+
+    &.colorGreen
+      :background-position -64px -16px
+
+    &.colorBlue
+      :background-position -80px -16px
+
+    &.justifyLeft
+      :background-position 0 0
+
+    &.justifyCenter
+      :background-position -16px 0
+
+    &.justifyRight
+      :background-position -32px 0
+
+    &.justifyFull
+      :background-position -48px 0
+
+    &.indent
+      :background-position -64px 0
+
+    &.outdent
+      :background-position -80px 0
+
+    &.subscript
+      :background-position -64px -16px
+
+    &.superscript
+      :background-position -80px -16px
+
+    &.undo
+      :background-position 0 -64px
+
+    &.redo
+      :background-position -16px -64px
+
+    &.insertOrderedList
+      :background-position -32px -48px
+
+    &.insertUnorderedList
+      :background-position -16px -48px
+
+    &.insertHorizontalRule
+      :background-position 0 -48px
+
+    &.h1
+      :background-position 0 -32px
+
+    &.h2
+      :background-position -16px -32px
+
+    &.h4
+      :background-position -48px -32px
+
+    &.h5
+      :background-position -64px -32px
+
+    &.h6
+      :background-position -80px -32px
+
+    &.cut
+      :background-position -32px -64px
+
+    &.copy
+      :background-position -48px -64px
+
+    &.paste
+      :background-position -64px -64px
+
+    &.increaseFontSize
+      :background-position -16px -80px
+
+    &.decreaseFontSize
+      :background-position -32px -80px
+
+    &.subscription
+      :background-position -48px -80px
+
+    &.insertImage
+      :background-position -80px -80px
+
+    &.html
+      :background-position -48px -48px
+
+    &.removeFormat
+      :background-position -80px -64px
+
+    &.empty
+      :background-position -64px -80px
+
+    &.createLink, &.changeURL
+      :background none
+      :font-size small
+      :color black
