@@ -37,13 +37,31 @@ body#index p.footer {
 /* --------- content page -------- */
 
 body {
-  padding: 0.5em;
+  padding-top: 0;
+  margin-top: 0;
+  margin-left: 20px;
+  background-color: lightgrey;
 }
 
 #wysiwyg {
-  border: none;
+  margin-top: 20px;
   min-height: 600px;
-  margin-right: 80px;
+  width: 750px;
+  background-color: white;
+  padding: 20px;
+  padding-top: 0;
+  border: 1px solid grey;
+  font-size: 0.88em;
+  line-height: 1.8em;
+}
+
+#wysiwyg h1, #wysiwyg h2 {
+  margin-top: 1.2em;
+  margin-bottom: 0.4em;
+}
+
+#wysiwyg h2 {
+  font-size: 1.2em;
 }
 
 .dropTarget {
@@ -71,7 +89,7 @@ body {
   float: left;
 }
 
-h1,h2,h3,hr {
+h1,h2,hr {
   clear: both;
 }
 
@@ -124,21 +142,23 @@ h1,h2,h3,hr {
 
 div.panel {
   position: fixed;
-  width: 70px;
+  width: 120px;
   height: 300px;
-  top: 50px;
-  right: 0px;
+  top: 20px;
+  left: 840px;
 
-  border: 1px solid black;
-  border-right: none;
-  -moz-border-radius-topleft: 5px;
-  -moz-border-radius-bottomleft: 5px;
-  -webkit-border-radius-top-left: 5px;
-  -webkit-border-radius-bottom-left: 5px;
+  border: 1px solid grey;
 
   background-color: #efefef;
 
   padding: 0 0 4px 4px;
+}
+
+.panel h1 {
+  font-size: 0.8em;
+  font-weight: normal;
+  font-style: italic;
+  color: grey;
 }
 
 div.panel ul {
@@ -166,8 +186,16 @@ div.panel .progress span.unsaved {
 
 ul.panel li { list-style-type: none; float: left; margin: 0 2px; }
 ul.panel li.break { clear: both; }
-ul.panel li a { opacity: 0.6; display: block; width: 16px; height: 16px; background: url('/images/controls.png') no-repeat -64px -80px; border: 0; cursor: pointer; padding: 1px; }
-ul.panel li a:hover, ul.panel li a.active { opacity: 0.99; }
+ul.panel li a { 
+  border: 1px solid #efefef;
+  display: block;
+  width: 16px;
+  height: 16px;
+  background: url('/images/controls.png') no-repeat -64px -80px;
+  cursor: pointer;
+  padding: 1px;
+}
+ul.panel li a:hover, ul.panel li a.active { border: 1px solid grey; }
 ul.panel li a.active { background-color: #f9f9f9; border: 1px solid #ccc; border-left-color: #AAA; border-top-color: #AAA; padding: 0; }
 
 ul.panel li a.bold { background-position: 0 -16px; }
@@ -196,7 +224,6 @@ ul.panel li a.insertHorizontalRule { background-position: 0 -48px; }
 
 ul.panel li a.h1 { background-position: 0 -32px; }
 ul.panel li a.h2 { background-position: -16px -32px; }
-ul.panel li a.h3 { background-position: -32px -32px; }
 ul.panel li a.h4 { background-position: -48px -32px; }
 ul.panel li a.h5 { background-position: -64px -32px; }
 ul.panel li a.h6 { background-position: -80px -32px; }
@@ -221,12 +248,12 @@ ul.panel li a.createLink, ul.panel li a.changeURL { background: none; font-size:
 
 /* ----------- Image Upload Form ----------- */
 #imageUpload {
-  visibility: hidden;
+  display: none;
 }
 
 /* ----------- change URL form ------------- */
 #changeURL {
-  visibility: hidden;
+  display: none;
 }
 
 .url {
@@ -241,10 +268,8 @@ ul.panel li a.createLink, ul.panel li a.changeURL { background: none; font-size:
 
 /* ------------ Footer -------------- */
 p.footer {
-  position: absolute;
-  bottom: 2em;
+  font-size: 0.8em;
 }
 p.footer, p.footer a {
-  font-size: 0.8em;
   color: grey;
 }
