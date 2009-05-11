@@ -32,7 +32,7 @@ dependency "dm-serializer", dm_gems_version
 dependency "merb_datamapper", merb_gems_version
 
 dependency "thin"
-#dependency "rmagick", :require_as => "RMagick.rb"
+dependency "rmagick", :require_as => "RMagick.rb"
 dependency "webrat"
 
 dependency "activesupport"

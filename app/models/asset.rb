@@ -1,5 +1,5 @@
 class Asset
-  VERSIONS = [['thumbnail', '100x100'], ['small', '300x300'], ['medium', '450x450'], ['large', '800x800']]
+  VERSIONS = [['thumb', '100'], ['half', '350'], ['full', '700']]
   attr :filename, :page
 
   def self.create(page, file)
@@ -46,6 +46,14 @@ class Asset
     
     image = Magick::Image.read("#{storage_dir}/#{basename}.#{extension}").first
     versions << ['original', "/assets/#{@page}/#{basename}.#{extension}", image.columns, image.rows]
+  end
+
+  def name
+    @filename
+  end
+
+  def url(version)
+    "/assets/#{@page}/#{basename}.#{version.to_s}.#{extension}"
   end
 
   def original

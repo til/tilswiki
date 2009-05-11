@@ -100,8 +100,8 @@ var $tw = function() {
   };
 
   tw.imageUploadSuccess = function(data) {
-    $(data).find('ul li.asset').each(function() {
-      $('#wysiwyg').append($('div.image', this)).append('<br/>');
+    $(data).find('ul.assets li').each(function() {
+      $('#wysiwyg').append($(this).html()).append('<br/>');
     });
 
     tb_remove(); // close thickbox
@@ -115,33 +115,23 @@ var $tw = function() {
     $('#wysiwyg div.image').
       attr('contenteditable', false).
       bind('mouseenter', function() {
+        if (!editing) { return; }
+
         var imageContainer = $(this);
 
         var titleBar = $('<div class="titleBar"></div>').
           attr('contenteditable', false).
-          css({
-            position: 'absolute',
-            top: $(this).offset().top - 25,
-            height: 25,
-            left: $(this).offset().left,
-            width: $(this).width() - 2,
-            'border-bottom': 'none'
-          }).
           mousedown(function() {
             // Drag start
             tw.suspendEditing();
 
-            var dropTarget = $('<div class="dropTarget"></div>').
-              css({
-                width: $('#wysiwyg').width(),
-                left:  $('#wysiwyg').offset().left
-              });
+            var dropTarget = $('<div class="dropTarget"></div>');
 
             $('body').
               css('cursor', 'move').
               append(dropTarget);
 
-            var targetElements = $('h1, h2, h3, br, div.image, p', $('#wysiwyg'));
+            var targetElements = $('h1, h2, br, div.image, p', $('#wysiwyg'));
             var targets = targetElements.map(function() {
               return $(this).position().top + 2;
             }).get().sort(function(a, b) { return a - b; });
@@ -190,55 +180,49 @@ var $tw = function() {
         $(this).append(titleBar);
 
         var resizeCorner = $('<div class="resizeCorner"></div>').
-          css({
-            position : 'absolute',
-            top      : $(this).offset().top + $(this).height() - 25,
-            left     : $(this).offset().left + $(this).width() - 25,
-            'z-index': 100
-          }).
           mousedown(function() {
             // Resize start
             tw.suspendEditing();
             $('body').css('cursor', 'se-resize');
+            $('.titleBar, .resizeCorner').remove();
 
-            var currentImage   = $('img.current', imageContainer);
+            var image = $('img', imageContainer);
+            var ratio = image.width() / image.height();
 
-            var resizeFrame = $('<div class="resizeFrame"></div>');
+            var resizeFrame = $('<div id="resizeFrame"></div>');
             resizeFrame.css({
-              top   : currentImage.offset().top,
-              left  : currentImage.offset().left,
-              width : currentImage.width(),
-              height: currentImage.height()
+              top   : image.offset().top - 5,
+              left  : image.offset().left - 5,
+              width : image.width(),
+              height: image.height()
             });
             $('body').append(resizeFrame);
 
-            var images = $('img', imageContainer);
-            var thresholdsX = Array();
-            var thresholdsY = Array();
-            for (var i = 0; i < images.length; i++) {
-              if (images[i+1]) {
-                thresholdsX.push(
-                  imageContainer.offset().left + images[i].width + (images[i+1].width - images[i].width)/2
-                );
-                thresholdsY.push(
-                  imageContainer.offset().top + images[i].height + (images[i+1].height - images[i].height)/2
-                );
+            var sizes = [ { 'width' : 100 }, { 'width' : 350 }, { 'width' : 750 }];
+            for(var i=0; i < sizes.length; i++) {
+              sizes[i].height = sizes[i].width / ratio;
+            }
+            for(var i=0; i < sizes.length; i++) {
+              if (sizes[i+1]) {
+                sizes[i].thresholdX = imageContainer.offset().left + sizes[i+1].width / 2;
+                sizes[i].thresholdY = imageContainer.offset().top + sizes[i+1].height / 2;
               }
             }
 
             $(document).
               mousemove(function(mouseEvent) {
                 var idx = 0;
-                for (var i = 0; i < thresholdsX.length; i++) {
-                  if (mouseEvent.pageX < thresholdsX[i] && mouseEvent.pageY < thresholdsY[i]) {
+                for (var i=0; i < sizes.length; i++) {
+                  if (i == sizes.length-1) { break; }
+                  if (mouseEvent.pageX < sizes[i].thresholdX && mouseEvent.pageY < sizes[i].thresholdY) {
                     break;
                   }
                   idx++;
                 }
-                if (images[idx].width != resizeFrame.width()) {
+                if (sizes[idx].width != resizeFrame.width()) {
                   resizeFrame.css({
-                    width : images[idx].width,
-                    height: images[idx].height
+                    width : sizes[idx].width,
+                    height: sizes[idx].height
                   });
                 }
                 return false;

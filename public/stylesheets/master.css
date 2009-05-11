@@ -66,11 +66,10 @@ body {
 
 .dropTarget {
   position: absolute;
-  left: 10px;
-  top: 10px;
+  left: 40px;
 
   height: 0;
-  width: 600px;
+  width: 750px;
   border-top: 5px dashed lightgrey;
 }
 
@@ -81,12 +80,6 @@ body {
   background: red;
   margin: 0;
   padding: 0;
-}
-
-#wysiwyg div.image {
-  margin: 0.5em;
-  margin-left: 0;
-  float: left;
 }
 
 h1,h2,hr {
@@ -103,44 +96,6 @@ hr {
   color: grey;
   font-size: smaller;
 }
-
-.titleBar, .resizeCorner {
-  border: 1px solid black;
-  background-color: #efefef;
-}
-
-.resizeCorner {
-  height: 23px;
-  width: 23px;
-  -moz-border-radius-topleft: 5px;
-  -webkit-border-radius-top-left: 5px;
-  cursor: se-resize;
-}
-
-.resizeFrame {
-  position: absolute;
-  border: 3px solid lightgrey;
-}
-
-.image img {
-  display: none;
-  visibility: hidden;
-}
-
-.image img.current {
-  display: inline;
-  visibility: visible;
-}
-
-.titleBar {
-  -moz-border-radius-topleft: 5px;
-  -webkit-border-radius-top-left: 5px;
-  -moz-border-radius-topright: 5px;
-  -webkit-border-radius-top-right: 5px;
-
-  cursor: move;
-}
-
 
 
 /* ----------- Image Upload Form ----------- */
