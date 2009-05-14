@@ -46,9 +46,9 @@ body {
 #wysiwyg {
   margin-top: 20px;
   min-height: 600px;
-  width: 750px;
+  width: 700px;
   background-color: white;
-  padding: 20px;
+  padding: 25px;
   padding-top: 0;
   border: 1px solid grey;
   font-size: 0.88em;
@@ -69,7 +69,7 @@ body {
   left: 40px;
 
   height: 0;
-  width: 750px;
+  width: 700px;
   border-top: 5px dashed lightgrey;
 }
 

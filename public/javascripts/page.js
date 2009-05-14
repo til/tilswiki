@@ -198,7 +198,9 @@ var $tw = function() {
             });
             $('body').append(resizeFrame);
 
-            var sizes = [ { 'width' : 100 }, { 'width' : 350 }, { 'width' : 750 }];
+            var sizes = [ { 'width' : 100, 'name' : 'thumb'  },
+                          { 'width' : 350, 'name' : 'half' },
+                          { 'width' : 700, 'name' : 'full'  }];
             for(var i=0; i < sizes.length; i++) {
               sizes[i].height = sizes[i].width / ratio;
             }
@@ -231,10 +233,11 @@ var $tw = function() {
                 // Resize stop
                 $(document).unbind('mousemove');
 
-                $('img', imageContainer).
-                  removeClass('current').
-                  filter('[width=' + resizeFrame.width() + ']').
-                  addClass('current');
+                $.each(sizes, function() {
+                  if (this.width == resizeFrame.width()) {
+                    image.attr('src', image.attr('src').replace(/\.(thumb|half|full)\./, '.' + this.name + '.'));
+                  }
+                });
 
                 resizeFrame.remove();
                 resizeCorner.remove();
