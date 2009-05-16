@@ -21,7 +21,7 @@ class Page
   def initialize
     new_version
     self.body = <<-HTML
-      <h1>Page Title</h1>
+      <h1>#{default_title}</h1>
       <p>Type your text here ...</p>
     HTML
   end
@@ -32,11 +32,15 @@ class Page
       title = Nokogiri::HTML($1).text.gsub(/\s+/, ' ').strip
     end
     
-    title = nil if title == "Page Title"
+    title = nil if title == default_title
 
     title || "A tilswiki page"
   end
   
+  def default_title
+    "Type your title here"
+  end
+
   def relocate(new_handle)
     return false if OldHandle.first(:name => new_handle)
     return false if Page.first(:handle => new_handle)
