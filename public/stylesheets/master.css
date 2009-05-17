@@ -56,12 +56,20 @@ body {
 }
 
 #wysiwyg h1, #wysiwyg h2 {
+  font-family: "arial black";
   margin-top: 1.2em;
   margin-bottom: 0.4em;
+  line-height: 1em;
+}
+
+#wysiwyg h1 {
+  font-size: 3em;
+  letter-spacing: -3px;
 }
 
 #wysiwyg h2 {
   font-size: 1.2em;
+  letter-spacing: -2px;
 }
 
 .dropTarget {
