@@ -65,3 +65,21 @@ describe Pages, "new URL suggestion" do
     end
   end
 end
+
+
+describe Pages, "create through ajax" do
+  before do
+    @response = post('/', {}, 
+      :http_accept           => "application/json",
+      :http_x_requested_with => "XMLHttpRequest")
+    @json = JSON::parse(@response.body)
+  end
+  
+  it "returns json hash with new location" do
+    @json.should have_key('location')
+  end
+  
+  it "includes host name and protocol" do
+    @json['location'].should =~ %r{^http://localhost/.+}
+  end
+end

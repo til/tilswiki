@@ -14,10 +14,17 @@ class Pages < Application
   end
 
   def create
+    provides :html, :json
+
     @page = Page.new
     @page.save
+    location = request.protocol + '://' + request.host / @page.handle
 
-    redirect "/" / @page.handle
+    if request.xhr?
+      display({ :location => location})
+    else
+      redirect location
+    end
   end
   
   def update(handle, body)
