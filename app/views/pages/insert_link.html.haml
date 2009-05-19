@@ -25,11 +25,12 @@
             url = $('input', this).val();
             insertLink(url);
           } else {
-            $.ajax({ async : false, 
-                     url   : '/',
-                     type  : 'POST',
+            $.ajax({ async    : false, 
+                     url      : '/',
+                     type     : 'POST',
                      dataType : 'json',
-                     success : function(data, textStatus) {
+                     data     : {},
+                     success  : function(data, textStatus) {
                                  insertLink(data['location']);
                                }
                     });
