@@ -31,7 +31,8 @@ Merb::Router.prepare do
   match('/', :method => 'post').to(:controller => 'Pages', :action => 'create')
   match('/', :method => 'put').to(:controller => 'Pages', :action => 'relocate')
 
-  match('/:handle', :method => 'get' ).to(:controller => 'Pages', :action => 'show')
+  match('/:handle', :method => 'get' ).to(:controller => 'Pages', :action => 'show').
+    name(:page)
   match('/:handle', :method => 'put' ).to(:controller => 'Pages', :action => 'update')
   match('/:handle', :method => 'post').to(:controller => 'Pages', :action => 'upload')
 
@@ -40,4 +41,6 @@ Merb::Router.prepare do
   match('/:handle/subscription',  :method => 'get'  ).to(:controller => 'Subscriptions', :action => 'show')
   match('/:handle/subscription',  :method => 'post' ).to(:controller => 'Subscriptions', :action => 'create')
   match('/unsubscribe/:secret', :method => 'get'  ).to(:controller => 'Subscriptions', :action => 'unsubscribe')
+
+  match('/:handle/versions', :method => 'get'  ).to(:controller => 'Versions', :action => 'index')
 end

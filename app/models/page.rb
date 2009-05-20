@@ -1,4 +1,5 @@
 require 'base62'
+require 'html_to_text'
 
 class Page
   include DataMapper::Resource
@@ -29,7 +30,7 @@ class Page
   def title
     title = nil
     if body =~ %r{<h1>(.*?)</h1>}im
-      title = Nokogiri::HTML($1).text.gsub(/\s+/, ' ').strip
+      title = html_to_text($1)
     end
     
     title = nil if title == default_title
@@ -51,23 +52,31 @@ class Page
   end
 
   def body
-    latest_version.body
+    version.body
   end
   
   def body=(body)
     new_version.body = body
   end
   
+  def version=(version)
+    @version = version
+  end
+
+  def version
+    @version ||= (latest_version || new_version)
+  end
+
   def new_version
     @new_version ||= versions.build
   end
   
   def latest_version
-    @new_version || versions.first(:order => [:created_at.desc])
+    versions.first(:order => [:created_at.desc])
   end
 
   def updated_at
-    latest_version.created_at
+    latest_version.andand.created_at
   end
   
 protected

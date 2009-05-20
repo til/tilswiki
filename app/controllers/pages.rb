@@ -8,6 +8,10 @@ class Pages < Application
     end
 
     @page = Page.get_by_handle!(handle)
+    if params[:version_id]
+      @version = Version.get(params[:version_id])
+      @page.version = @version
+    end
 
     @headers['Cache-control'] = "no-cache"
     render
