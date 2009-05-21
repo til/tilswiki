@@ -1,4 +1,4 @@
-// The main tilswiki javascript module, concerned with core functionality
+// $tw is the main tilswiki javascript module, concerned with core functionality
 // edit, autosave etc.
 
 var $tw = function() {
@@ -60,20 +60,13 @@ var $tw = function() {
   };
   tw.progressSaved = function() {
     var progress = $('.progress');
-    var childrenToFadeOut;
 
     if (
       !progress.data('unsaved_at')
     ||
       progress.data('saving_at') > progress.data('unsaved_at')
     ) {
-      progress.html('<img src="/images/ajax-loader-still.gif" /><span>saved</span>');
-
-      childrenToFadeOut = progress.children();
-
-      setTimeout(function() {
-        childrenToFadeOut.fadeOut('slow');
-      }, 1000);
+      progress.html('<span>All changes saved</span>');
     }
   };
 
