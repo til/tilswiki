@@ -10,11 +10,11 @@
 
 - @page.versions.reverse.each do |version|
   %h2
-    = version.id
+    = version.number
     \:
     = time_ago_in_words(version.created_at)
     ago
   %p
     =html_to_text(version.body)
   %p
-    =link_to('view', url(:page, :version_id => version))
+    =link_to('view', url(:page, :version => version.number))

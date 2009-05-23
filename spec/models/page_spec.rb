@@ -142,3 +142,24 @@ describe Page, "title" do
     @page.title.should == "Foo Bar"
   end
 end
+
+
+describe Page, "with numbered versions" do
+  before do
+    @page = Page.generate
+  end
+
+  it "starts at number 1" do
+    @page.version.number.should == 1
+  end
+  
+  it "increases number for new versions" do
+    @page.body = "foobar"
+    @page.save!
+
+    @page.reload
+
+    @page.body.should == "foobar"
+    @page.version.number.should == 2
+  end
+end

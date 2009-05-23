@@ -23,3 +23,12 @@ Spec::Runner.configure do |config|
   end
   
 end
+
+Page.fixture {{ 
+    
+}}
+
+
+Version.fixture {{
+
+}}

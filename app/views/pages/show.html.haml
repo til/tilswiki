@@ -1,18 +1,17 @@
 - throw_content(:for_head) do
   %title= @page.title
+  %script{ :src => "/javascripts/pretty-date.js", :type => "text/javascript" }
   %script{ :src => "/javascripts/page.js", :type => "text/javascript" }
   = css_include_tag :page
 
-- if @version
-  #panel
-    %h1
-      Version
-      = @version.id
-      ,
-      = time_ago_in_words(@version.created_at)
-      ago
-- else
-  = partial('panel')
+#panel
+  .nav
+    %div.current
+      %a{:href=>"#panel_edit"} Edit
+    %div
+      %a{:href=>"#panel_history"} History
+  = partial('panel_edit')
+  = partial('panel_history')
 
 #wysiwyg{:contenteditable => "true"}
   = @page.body

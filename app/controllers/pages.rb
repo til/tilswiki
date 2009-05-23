@@ -8,13 +8,18 @@ class Pages < Application
     end
 
     @page = Page.get_by_handle!(handle)
-    if params[:version_id]
-      @version = Version.get(params[:version_id])
+    if params[:version]
+      @version = @page.versions(:number => params[:version]).first or
+        raise DataMapper::ObjectNotFoundError
       @page.version = @version
     end
 
     @headers['Cache-control'] = "no-cache"
-    render
+    if request.xhr?
+      return @page.body
+    else
+      render
+    end
   end
 
   def create

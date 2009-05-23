@@ -19,12 +19,13 @@ class Page
     first(:handle => handle) or raise DataMapper::ObjectNotFoundError
   end
 
-  def initialize
+  def initialize(*args)
     new_version
     self.body = <<-HTML
       <h1>#{default_title}</h1>
       <p>Type your text here ...</p>
     HTML
+    super
   end
 
   def title
@@ -68,11 +69,12 @@ class Page
   end
 
   def new_version
-    @new_version ||= versions.build
+    @new_version ||= versions.build(
+      :number => (latest_version.andand.number || 0)  + 1)
   end
   
   def latest_version
-    versions.first(:order => [:created_at.desc])
+    versions.first(:order => [:number.desc])
   end
 
   def updated_at
@@ -85,6 +87,7 @@ protected
     if @new_version
       @new_version.save
       @new_version = nil
+      @version = nil
     end
   end
 end

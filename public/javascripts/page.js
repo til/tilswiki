@@ -333,4 +333,73 @@ $(function() {
 
   $tw.activateImageEvents();
   $tw.activateLinkEvents();
+
+  var versions = {};
+  var current_version = $('#current_version');
+  function updateCurrentVersion(number) {
+    current_version.html('<p>Version ' + number + '</p>' +
+                         '<p>' + prettyDate(versions[number-1]['created_at']) + '</p>' +
+                         '<p class="detail">(' + versions[number-1]['created_at'] + ')</p>');
+    if(number < versions.length) {
+      current_version.append("<button title='Revert page content to this version'>Revert</button>");
+      $('button', current_version).click(function() {
+        switchToEditPanel(true);
+      });
+    }
+  }
+
+  function switchToEditPanel(revert) {
+    $('#slider').slider('destroy');
+    current_version.html('');
+    if (!revert) {
+      $('#wysiwyg').html($('#wysiwyg').data('content'));
+    }
+    $('.progress').html('');
+    $tw.resumeEditing();
+
+    $('#panel div').removeClass('current');
+    $('#panel .nav a[href=#panel_edit]').parent('div').addClass('current');
+
+    $("#panel_edit").show();
+    $("#panel_history").hide();
+  }
+
+  $('#panel .nav a[href=#panel_history]').click(function() {
+    $tw.suspendEditing();
+
+    $.ajax({
+      url      : document.location + '/versions',
+      dataType : 'json',
+      success  : function(data) {
+        versions = data;
+        $('#slider').
+          css('height', Math.max(Math.min(versions.length * 10, 500), 50) + 'px').
+          slider({
+          orientation : 'vertical',
+          min : 1,
+          max : versions.length,
+          value : versions.length,
+          slide : function(event, ui) {
+            updateCurrentVersion(ui.value);
+          },
+          change : function(event, ui) {
+            $('#wysiwyg').load(window.location + '?version=' + ui.value);
+          }
+        });
+        updateCurrentVersion(versions.length);
+      }
+    });
+
+    $('#panel div').removeClass('current');
+    $(this).show().parent('div').addClass('current');
+
+    $("#panel_history").show();
+    $("#panel_edit").hide();
+    return false;
+  });
+
+  $('#panel .nav a[href=#panel_edit]').click(function() {
+    switchToEditPanel();
+    return false;
+  });
 });
