@@ -341,10 +341,20 @@ $(function() {
                          '<p>' + prettyDate(versions[number-1]['created_at']) + '</p>' +
                          '<p class="detail">(' + versions[number-1]['created_at'] + ')</p>');
     if(number < versions.length) {
-      current_version.append("<button title='Revert page content to this version'>Revert</button>");
-      $('button', current_version).click(function() {
-        switchToEditPanel(true);
-      });
+      current_version.append("<button class='ui-state-default ui-corner-all'"
+                             + " title='Revert page content to this version'>Revert</button>");
+      $('button', current_version)
+        .hover(
+          function() {
+            $(this).addClass("ui-state-hover");
+          },
+          function() {
+            $(this).removeClass("ui-state-hover");
+          }
+        )
+        .click(function() {
+          switchToEditPanel(true);
+        });
     }
   }
 
