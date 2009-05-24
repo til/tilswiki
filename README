@@ -1,0 +1,52 @@
+= DESCRIPTION
+
+A wiki that is always in edit mode using the html contentEditable
+attribute. Built with merb and jQuery. For more information and a
+working installation of tilswiki see the project page at
+<http://wiki.tils.net/>.
+
+
+== INSTALLATION
+
+You will need a recent ruby installation and the header files for
+ImageMagick and sqlite. Depending on your OS, you might need to
+install the packages ruby, imagemagick-dev and sqlite3-dev.
+
+git clone git://github.com/til/tilswiki.git
+cd tilswiki
+bin/thor merb:gem:redeploy
+
+To start, run:
+
+bin/merb
+
+Merb runs on <http://localhost:4000/> by default.
+
+
+== VERSIONS
+
+Generally, running from the latest HEAD in the repos should be fine.
+
+
+release/tilswiki-0.8
+
+First officially numbered version
+
+
+== LICENSE
+
+Copyright (C) 2009 Tilmann Singer
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+A copy of the GNU Affero General Public License is in
+public/agpl.txt. You can also read it at
+<http://www.gnu.org/licenses/>.
