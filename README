@@ -27,10 +27,13 @@ Merb runs on <http://localhost:4000/> by default.
 
 Generally, running from the latest HEAD in the repos should be fine.
 
+Version 0.8
 
-release/tilswiki-0.8
+First officially numbered version. To get it, do a
 
-First officially numbered version
+git checkout release/tilswiki-0.8
+
+after cloning the repository.
 
 
 == LICENSE
