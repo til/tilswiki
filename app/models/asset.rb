@@ -20,6 +20,10 @@ class Asset
     FileUtils.rm_rf(storage_dir(page))
   end
   
+  def self.storage_dir(page)
+    Merb.dir_for(:public) / "assets" / page
+  end
+
   def initialize(page)
     @page = page
   end
@@ -58,10 +62,6 @@ class Asset
 
   def original
     @original ||= Magick::Image.read(storage_dir / @filename).first
-  end
-
-  def self.storage_dir(page)
-    Merb.dir_for(:public) / "assets" / page
   end
 
   def storage_dir
