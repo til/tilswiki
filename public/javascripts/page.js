@@ -112,7 +112,8 @@ var $tw = function() {
 
         var imageContainer = $(this);
 
-        var titleBar = $('<div class="titleBar"></div>').
+        var titleBar = $('<div class="titleBar" '
+                         + 'title="Click and drag mouse to move image"></div>').
           attr('contenteditable', false).
           mousedown(function() {
             // Drag start
@@ -172,7 +173,8 @@ var $tw = function() {
           });
         $(this).append(titleBar);
 
-        var resizeCorner = $('<div class="resizeCorner"></div>').
+        var resizeCorner = $('<div class="resizeCorner" '
+                             + 'title="Click and drag mouse to resize image"></div>').
           mousedown(function() {
             // Resize start
             tw.suspendEditing();
@@ -248,6 +250,10 @@ var $tw = function() {
         if (!editing) { return; }
 
         $('.titleBar, .resizeCorner').remove();
+      }).
+      bind('mousedown', function() {
+        // Avoid unwanted drag within contentEditable element
+        return(false);
       });
   };
 
