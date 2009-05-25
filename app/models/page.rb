@@ -29,11 +29,10 @@ class Page
   end
 
   def title
-    title = nil
-    if body =~ %r{<h1>(.*?)</h1>}im
-      title = html_to_text($1)
+    title = Nokogiri::HTML(body).css('h1:first').andand do |h1|
+      !h1.blank? && html_to_text(h1.text)
     end
-    
+
     title = nil if title == default_title
 
     title || "A tilswiki page"

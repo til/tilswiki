@@ -127,8 +127,7 @@ end
 describe Page, "title" do
   
   it "is derived from the first h1 element of body" do
-    @page = Page.new
-    @page.body = <<-HTML
+    @page = Page.new(:body => <<-HTML)
       fluff
       <h1>My 
           birthday
@@ -140,6 +139,15 @@ describe Page, "title" do
     
     @page.title.should == "My birthday"
   end
+
+  it "also works with attributes in the h1" do
+    @page = Page.new(:body => <<-HTML)
+      <h1 type='font-color: red;'>My birthday</h1>
+    HTML
+    
+    @page.title.should == "My birthday"
+  end
+
   
   it "has a default when no h1 in body" do
     @page = Page.new
