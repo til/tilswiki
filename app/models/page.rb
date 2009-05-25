@@ -44,8 +44,10 @@ class Page
   end
 
   def relocate(new_handle)
-    return false if OldHandle.first(:name => new_handle)
+    OldHandle.first(:page_id => self.id, :name => new_handle).andand.destroy
     return false if Page.first(:handle => new_handle)
+    return false if OldHandle.first(:name => new_handle)
+    return false if old_handles.size >= 10
 
     old_handles.create(:name => self.handle)
     self.handle = new_handle

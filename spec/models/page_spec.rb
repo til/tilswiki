@@ -58,7 +58,6 @@ end
 
 describe Page, "create" do
   before do
-    pending "Refactor page versioning so that new works again"
     @page = Page.create :body => 'abc', :handle => 'zacke'
   end
   
@@ -70,9 +69,11 @@ end
 
 
 describe Page, "relocate" do
-  before do
+  before(:each) do
     Page.all.each(&:destroy)
+    OldHandle.all.each(&:destroy)
     @page = Page.new; @page.save
+    @old_this = @page.old_handles.create(:name => 'old_this')
     
     @other = Page.new; @other.save
     @other.old_handles.create(:name => 'old_other')
@@ -101,6 +102,24 @@ describe Page, "relocate" do
 
   it "returns false when handle is taken by other old handle" do
     @page.relocate("old_other").should be_false
+  end
+  
+  it "returns true when handle is taken by this page" do
+    @page.relocate("old_this").should be_true
+  end
+end
+
+
+describe Page, "relocate with many handles" do
+  before do
+    @page = Page.generate
+    10.times do |i|
+      @page.old_handles.create(:name => "old_#{i}")
+    end
+  end
+
+  it "returns false" do
+    @page.relocate("straw").should be_false
   end
 end
 
