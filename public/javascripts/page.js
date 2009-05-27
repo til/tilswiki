@@ -388,6 +388,7 @@ $(function() {
       dataType : 'json',
       success  : function(data) {
         versions = data;
+        $('img.progress').remove();
         $('#slider').
           css('height', Math.max(Math.min(versions.length * 10, 500), 50) + 'px').
           slider({
@@ -409,7 +410,9 @@ $(function() {
     $('#panel div').removeClass('current');
     $(this).show().parent('div').addClass('current');
 
-    $("#panel_history").show();
+    $("#panel_history").
+      append('<img class="progress" src="/images/ajax-loader.gif" />').
+      show();
     $("#panel_edit").hide();
     return false;
   });
