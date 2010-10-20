@@ -1,8 +1,4 @@
-nohup.out
-
-log
-
-gems/gems
-gems/specifications
-
-db/*.db
+.bundle
+db/*.sqlite3
+log/*.log
+tmp/**/*
