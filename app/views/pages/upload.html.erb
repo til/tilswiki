@@ -1,0 +1,12 @@
+<ul class="assets">
+  <% @assets.each do |asset| -%>
+    <li>
+      <div class='image'>
+        <%= tag :img,
+                :src   => asset.url(:half),
+                :class => 'half',
+                :alt   => asset.name %>
+      </div>
+    </li>
+  <% end -%>
+</ul>

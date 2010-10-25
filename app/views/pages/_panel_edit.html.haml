@@ -1,0 +1,38 @@
+#panel_edit
+  %ul
+    %li#panel_h1
+      %a{ :href => "#", :title => "Make the current line a big heading" }
+    %li#panel_h2
+      %a{ :href => "#", :title => "Make the current line a medium heading" }
+  %ul
+    %li#panel_bold
+      %a{ :href => "#", :title => "Make selected text bold" }
+    %li#panel_italic
+      %a{ :href => "#", :title => "Make selected text italic" }
+  %ul
+    %li#panel_colorRed
+      %a{ :href => "#", :title => "Make selected text red" }
+    %li#panel_colorGreen
+      %a{ :href => "#", :title => "Make selected text green" }
+    %li#panel_colorBlue
+      %a{ :href => "#", :title => "Make selected text blue" }
+  %ul
+    %li#panel_increaseFontSize
+      %a{ :href => "#", :title => "Make selected text larger" }
+    %li#panel_decreaseFontSize
+      %a{ :href => "#", :title => "Make selected text smaller" }
+  %ul
+    %li#panel_insertHorizontalRule
+      %a{ :href => "#", :title => "Insert horizontal rule" }
+    %li#panel_insertImage
+      %a.thickbox{ :href => "#TB_inline?height=300&width=300&inlineId=imageUpload", :title => "Insert images" }
+    %li#panel_subscription
+      %a.thickbox{:rel=>'nofollow', :href => "/#{params[:id]}/subscription?height=300&width=400", :title => "Subscribe to update notifications by Email" }
+  %br
+  %ol
+    %li#panel_createLink
+      %a.thickbox{:rel=>'nofollow', :href=> '/' + params[:id] + '/insert_link?TB_iframe=true&height=300&width=500', :title=>'Insert a Link'} Insert Link
+    %li#panel_changeURL
+      %a.thickbox{:href=>'#TB_inline?height=300&width=300&inlineId=changeURL', :title=>'Change the URL of this page'} Change URL
+
+  %p.progress

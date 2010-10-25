@@ -2,6 +2,24 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.0.1'
 
+gem 'haml', '3.0.22'
+
+gem 'andand'
+
+gem 'dm-rails',             '~> 1.0.3'
+
+DM_VERSION = '~> 1.0.0'
+gem 'dm-sqlite-adapter',    DM_VERSION
+gem 'dm-migrations',        DM_VERSION
+gem 'dm-types',             DM_VERSION
+gem 'dm-validations',       DM_VERSION
+gem 'dm-constraints',       DM_VERSION
+gem 'dm-transactions',      DM_VERSION
+gem 'dm-aggregates',        DM_VERSION
+gem 'dm-timestamps',        DM_VERSION
+gem 'dm-observer',          DM_VERSION
+
+
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
@@ -17,7 +35,7 @@ gem 'rails', '3.0.1'
 
 # Bundle the extra gems:
 # gem 'bj'
-# gem 'nokogiri'
+gem 'nokogiri'
 # gem 'sqlite3-ruby', :require => 'sqlite3'
 # gem 'aws-s3', :require => 'aws/s3'
 

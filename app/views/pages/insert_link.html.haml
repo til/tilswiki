@@ -1,0 +1,77 @@
+%html
+  %head
+    %link{ :href => "/stylesheets/screen.css", :rel => "stylesheet", :media => "screen", :type => "text/css", :charset => "utf-8" }/
+    %script{ :src => "/javascripts/jquery-1.3.2.min.js",    :type => "text/javascript" }
+    :javascript
+      $(function() {
+      
+
+        function insertLink(url) {
+          // Append &nbsp;, otherwise when the link is at the end and
+          // the user clicks into the wysiwyg div, the cursor is inside
+          // the link
+          self.parent.$('#wysiwyg').focus();
+          self.parent.document.execCommand('insertHTML', 
+                                           false,
+                                           '\n<a href="'+ url + '">' + url + '</a> &nbsp; ');
+          self.parent.$tw.activateLinkEvents();
+          self.parent.$tw.checkIfDirty();
+          self.parent.tb_remove();
+        }
+
+        $('#insertLink form').submit(function() {
+          var url;
+          if ($('input#insertLinkURL', this).size() > 0) {
+            url = $('input', this).val();
+            insertLink(url);
+          } else {
+            $.ajax({ async    : false, 
+                     url      : '/',
+                     type     : 'POST',
+                     dataType : 'json',
+                     data     : {},
+                     success  : function(data, textStatus) {
+                                 insertLink(data['location']);
+                               }
+                    });
+          }
+
+          return false;
+        });
+
+        $('a.cancel').click(function() {
+          self.parent.tb_remove();
+          return false;
+        });
+        // No idea why, but setting the focus only works in a timeout
+        setTimeout(function() {
+          $('#insertLink input').get(0).focus();
+        }, 500);
+      });
+    %style
+      :sass
+        #insertLinkURL
+          :width 100%
+        h2
+          :font-family 'arial black'
+          :letter-spacing -3px
+
+  %body
+    #insertLink
+      %h2 URL of External Page
+      = form :action => '/' do
+        %p
+          %input#insertLinkURL
+        %p.help
+          For example <em>http://twitter.com/til</em>
+        %p
+          = submit 'OK'
+          %a.cancel{:href=>"#"} Cancel
+      %hr
+        %h2 Or New tilswiki Page
+      = form :method => :post, :action => '/' do
+        %p
+          = submit 'Create New Page and Insert Link'
+          %a.cancel{:href=>"#"} Cancel
+
+        

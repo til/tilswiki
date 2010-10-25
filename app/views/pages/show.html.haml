@@ -1,0 +1,44 @@
+- content_for :head do
+  %title= @page.title
+  %script{ :src => "/javascripts/pretty-date.js", :type => "text/javascript" }
+  %script{ :src => "/javascripts/page.js", :type => "text/javascript" }
+  = stylesheet_link_tag 'page'
+
+#panel
+  .nav
+    %div.current
+      %a{:href=>"#panel_edit"} Edit
+    %div
+      %a{:href=>"#panel_history"} History
+  = render :partial => 'panel_edit'
+  = render :partial => 'panel_history'
+
+#wysiwyg{:contenteditable => "true"}
+  != @page.body
+
+#imageUpload
+  = form :action => "/#{params[:id]}", :method => 'POST', :enctype => 'multipart/form-data' do
+    %input{ :name => "files[]", :type => "file" }
+    %br
+    %p.more
+      %a{ :href => "#" }
+        + upload more
+    %p
+      %input{:type=>'submit', :value=>'OK'}
+      %a.cancel{:href=>"#"} Cancel
+
+#changeURL
+  %h3 Current URL of this page
+  %p.url= "http://wiki.tils.net/<em>#{params[:handle]}</em>"
+
+  %h3 Change it to
+  = form :action => '/', :method => 'PUT' do
+    %p
+      %span.url http://wiki.tils.net/
+      = hidden_field :name => 'handle', :value => params[:handle]
+      = text_field :name => 'new_handle', :value => @page.title.gsub(/[^\w]+/, '_').downcase
+    %p.help
+      Don't worry: the old URL will be remembered, and it will redirect to the new URL.
+    %p
+      = submit 'OK'
+      %a.cancel{:href=>"#"} Cancel

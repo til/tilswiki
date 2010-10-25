@@ -1,0 +1,35 @@
+<script type="text/javascript">
+$(function() {
+  $('#subscription').ajaxForm({
+    url : '<%= '/' / @page.handle / 'subscription' %>',
+    success : tb_remove
+  });
+
+  $('#subscription a.cancel').click(function() {
+    tb_remove();
+    return false;
+  });
+});
+</script>
+
+
+
+<h2>Email notification</h2>
+
+<p>
+  If you enter your email address here then tilswiki will send you an
+  email every time someone makes changes to this page.
+</p>
+
+<%= form(:action => '/' / @page.handle / 'subscription', :method => 'post', :id => 'subscription') do %>
+
+  <label for="email">Your Email</label>
+  <%= text_field :id => 'email', :name => 'email' %>
+  <%= submit 'Subscribe' %>
+  <a href="#" class="cancel">Cancel</a>
+<% end =%>
+
+<p>
+  Every email will have an unsubscribe link at the bottom, so that you
+  can easily make tilswiki stop sending you further emails.
+</p>

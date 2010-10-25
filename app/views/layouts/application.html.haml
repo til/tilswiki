@@ -1,0 +1,26 @@
+!!! Strict
+%html{ html_attrs("en_us") }
+  %head
+    %meta{ :content => "text/html; charset=utf-8", "http-equiv" => "content-type" }/
+    %link{ :rel => "icon", :href => "/images/favicon.png", :type => "image/png" }/
+
+    = stylesheet_link_tag "screen",                     :media => :screen
+    = stylesheet_link_tag "thickbox",                   :media => :screen
+    = stylesheet_link_tag "jquery-ui-1.7.1.custom.css", :media => :screen
+
+    = stylesheet_link_tag "print",  :media => :print
+
+    = javascript_include_tag "jquery-1.3.2.min.js"
+    = javascript_include_tag "jquery-ui-1.7.1.custom.min.js"
+    = javascript_include_tag "jquery.form-2.18.js"
+    = javascript_include_tag "thickbox-compressed.js"
+
+    = yield :head
+
+  %body{:id=> yield(:page_id) || 'body'}
+    = yield
+
+    %p.footer
+      Powered by:
+      %a{ :href => "http://wiki.tils.net/"}
+        %strong tilswiki

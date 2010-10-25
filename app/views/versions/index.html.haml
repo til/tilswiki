@@ -1,0 +1,20 @@
+%style
+  :sass
+    ol
+      list-style: none
+      padding: 0
+
+%h1
+  Versions of
+  %q= @page.title
+
+- @page.versions.reverse.each do |version|
+  %h2
+    = version.number
+    \:
+    = time_ago_in_words(version.created_at)
+    ago
+  %p
+    =html_to_text(version.body)
+  %p
+    =link_to('view', url(:page, :version => version.number))
