@@ -37,20 +37,19 @@ class PagesController < ApplicationController
   def update
     @page = Page.get_by_handle!(params[:id])
 
+    if new_handle = params[:page][:handle]
+      if @page.relocate(new_handle)
+        redirect_to page_path(@page.reload)
+      else
+        render :text => "Sorry, this name is already in use", :status => 409 # Conflict
+      end
+      return
+    end
+
     @page.body = params[:body]
     @page.save
 
     render :text => "Updated"
-  end
-
-  def relocate(handle, new_handle)
-    @page = Page.get_by_handle!(handle)
-    
-    if @page.relocate(new_handle)
-      redirect "/" / @page.reload.handle
-    else
-      render "Sorry, this name is already in use", :status => 409 # Conflict
-    end
   end
 
   def upload(handle)

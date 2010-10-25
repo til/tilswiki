@@ -29,16 +29,15 @@
 
 #changeURL
   %h3 Current URL of this page
-  %p.url= "http://wiki.tils.net/<em>#{params[:handle]}</em>"
+  %p.url!= "http://wiki.tils.net/<em>#{@page.handle}</em>"
 
   %h3 Change it to
-  = form :action => '/', :method => 'PUT' do
+  = form_for(@page) do |f|
     %p
       %span.url http://wiki.tils.net/
-      = hidden_field :name => 'handle', :value => params[:handle]
-      = text_field :name => 'new_handle', :value => @page.title.gsub(/[^\w]+/, '_').downcase
+      = f.text_field :handle, :value => @page.title.gsub(/[^\w]+/, '_').downcase
     %p.help
       Don't worry: the old URL will be remembered, and it will redirect to the new URL.
     %p
-      = submit 'OK'
+      = f.submit 'OK'
       %a.cancel{:href=>"#"} Cancel

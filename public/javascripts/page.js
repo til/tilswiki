@@ -21,7 +21,7 @@ var $tw = function() {
 
     $.ajax({
              url:     '/' + document.location.toString().split('/').pop(),
-             data:    { body: wysiwyg.html() },
+             data:    { "page[body]" : wysiwyg.html() },
              type:    'PUT',
              'success': successCallback
            });
