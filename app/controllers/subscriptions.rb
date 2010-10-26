@@ -1,4 +1,4 @@
-class Subscriptions < Application
+class Subscriptions < ApplicationController
 
   def show
     @page = Page.get_by_handle!(params[:handle])
@@ -9,7 +9,7 @@ class Subscriptions < Application
     @page = Page.get_by_handle!(params[:handle])
     @subscription = Subscription.new(:email => params[:email], :page => @page)
     
-    @subscription.save!
+    @subscription.save
 
     render "OK", :status => 201
   end

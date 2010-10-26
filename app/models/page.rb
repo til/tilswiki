@@ -74,7 +74,7 @@ class Page
   end
 
   def new_version
-    @new_version ||= versions.build(
+    @new_version ||= versions.new(
       :number => (latest_version.andand.number || 0)  + 1)
   end
   

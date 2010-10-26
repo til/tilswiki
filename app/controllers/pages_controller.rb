@@ -46,7 +46,7 @@ class PagesController < ApplicationController
       return
     end
 
-    @page.body = params[:body]
+    @page.body = params[:page][:body]
     @page.save
 
     render :text => "Updated"

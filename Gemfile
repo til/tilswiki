@@ -45,3 +45,13 @@ gem 'nokogiri'
 # group :development, :test do
 #   gem 'webrat'
 # end
+
+
+group :development do
+  gem 'awesome_print'
+  gem 'wirble'
+end
+
+group :development, :test do
+  gem "rspec-rails", ">= 2.0.1"
+end
