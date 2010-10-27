@@ -21,8 +21,8 @@
 
         $('#insertLink form').submit(function() {
           var url;
-          if ($('input#insertLinkURL', this).size() > 0) {
-            url = $('input', this).val();
+          if ($('#insertLinkURL', this).size() > 0) {
+            url = $('#insertLinkURL').val();
             insertLink(url);
           } else {
             $.ajax({ async    : false, 
@@ -59,19 +59,19 @@
   %body
     #insertLink
       %h2 URL of External Page
-      = form :action => '/' do
+      = form_tag '/' do
         %p
           %input#insertLinkURL
         %p.help
           For example <em>http://twitter.com/til</em>
         %p
-          = submit 'OK'
+          = submit_tag 'OK'
           %a.cancel{:href=>"#"} Cancel
       %hr
         %h2 Or New tilswiki Page
-      = form :method => :post, :action => '/' do
+      = form_tag '/', :method => :post do
         %p
-          = submit 'Create New Page and Insert Link'
+          = submit_tag 'Create New Page and Insert Link'
           %a.cancel{:href=>"#"} Cancel
 
         

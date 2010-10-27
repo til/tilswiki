@@ -25,10 +25,9 @@ class PagesController < ApplicationController
   def create
     @page = Page.new
     @page.save
-    #location = request.protocol + '://' + request.host + '/' + @page.handle
-
+    
     if request.xhr?
-      display({ :location => location})
+      render :json => { :location => page_url(@page)}
     else
       redirect_to @page
     end

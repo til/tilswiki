@@ -14,7 +14,11 @@ Tilswiki::Application.routes.draw do
   #   resources :products
 
 
-  resources :pages, :path => ""
+  resources :pages, :path => "" do
+    member do
+      get 'insert_link'
+    end
+  end
 
   # Sample resource route with options:
   #   resources :products do
