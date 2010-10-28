@@ -4,13 +4,13 @@ class Asset
 
   def self.create(page, file)
     asset = Asset.new(page)
-    asset.filename = file['filename']
+    asset.filename = file.original_filename
 
     dir = asset.storage_dir
     
     FileUtils.mkdir(dir) unless File.exists?(dir)
     
-    FileUtils.mv(file['tempfile'].path, dir / file['filename'])
+    FileUtils.mv(file.path, dir.join(asset.filename))
     asset.create_versions!
 
     return asset
@@ -20,10 +20,6 @@ class Asset
     FileUtils.rm_rf(storage_dir(page))
   end
   
-  def self.storage_dir(page)
-    Merb.dir_for(:public) / "assets" / page
-  end
-
   def initialize(page)
     @page = page
   end
@@ -65,7 +61,7 @@ class Asset
   end
 
   def storage_dir
-    Asset.storage_dir(@page)
+    Rails.root.join("public", "assets", @page)
   end
 
   def extension

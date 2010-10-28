@@ -17,8 +17,8 @@
   != @page.body
 
 #imageUpload
-  = form :action => "/#{params[:id]}", :method => 'POST', :enctype => 'multipart/form-data' do
-    %input{ :name => "files[]", :type => "file" }
+  = form_tag page_assets_path(@page), :method => 'POST', :enctype => 'multipart/form-data' do
+    %input{ :name => "assets[]", :type => "file" }
     %br
     %p.more
       %a{ :href => "#" }

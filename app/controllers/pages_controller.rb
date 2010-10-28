@@ -50,14 +50,6 @@ class PagesController < ApplicationController
 
     render :text => "Updated"
   end
-
-  def upload(handle)
-    @assets = (params[:files] || []).
-      reject(&:blank?).
-      collect { |file| Asset.create(handle, file) }
-    
-    render :status => 201
-  end
   
   def insert_link
     render :layout => false

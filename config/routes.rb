@@ -18,6 +18,7 @@ Tilswiki::Application.routes.draw do
     member do
       get 'insert_link'
     end
+    resources :assets
   end
 
   # Sample resource route with options:

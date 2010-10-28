@@ -6,6 +6,8 @@ gem 'haml', '3.0.22'
 
 gem 'andand'
 
+gem 'rmagick', :require => 'RMagick'
+
 gem 'dm-rails',             '~> 1.0.3'
 
 DM_VERSION = '~> 1.0.0'
