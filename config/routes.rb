@@ -19,6 +19,7 @@ Tilswiki::Application.routes.draw do
       get 'insert_link'
     end
     resources :assets
+    resources :versions
   end
 
   # Sample resource route with options:

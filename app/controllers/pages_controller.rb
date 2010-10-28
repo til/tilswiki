@@ -16,9 +16,9 @@ class PagesController < ApplicationController
 
     headers['Cache-control'] = "no-cache"
     if request.xhr?
-      return @page.body
+      render :text => @page.body
     else
-      return @page
+      render
     end
   end
 
