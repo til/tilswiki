@@ -1,0 +1,15 @@
+#!/bin/sh
+
+git push
+
+ssh tils.net "cd /web/tilswiki                         ;
+              git reset --hard                         ;
+              source /home/tils/.rvm/scripts/rvm       ;
+              rvm use 1.9.2@tilswiki                   ;
+              export RAILS_ENV=production              ;
+              export LD_LIBRARY_PATH=/usr/local/lib    ;
+              rake db:migrate                          ;
+              kill -QUIT \`cat tmp/pids/unicorn.pid\`  ;
+              sleep 1                                  ;
+              unicorn_rails -E production -p 4000 -D
+"
