@@ -1,6 +1,6 @@
 class Asset
   VERSIONS = [['thumb', '100'], ['half', '350'], ['full', '700']]
-  attr :filename, :page
+  attr_accessor :filename, :page
 
   def self.create(page, file)
     asset = Asset.new(page)
