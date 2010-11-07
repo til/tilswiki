@@ -10,7 +10,6 @@
           // Append &nbsp;, otherwise when the link is at the end and
           // the user clicks into the wysiwyg div, the cursor is inside
           // the link
-          self.parent.$('#wysiwyg').focus();
           self.parent.document.execCommand('insertHTML', 
                                            false,
                                            '\n<a href="'+ url + '">' + url + '</a> &nbsp; ');
