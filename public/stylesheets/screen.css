@@ -241,7 +241,8 @@ body {
       margin: 0; }
   body#index .date {
     font-weight: normal;
-    color: grey; }
+    margin-left: 0.3em;
+    color: #cecece; }
   body#index form {
     margin-top: 20px;
     margin-bottom: 20px; }
