@@ -56,4 +56,10 @@ end
 
 group :development, :test do
   gem "rspec-rails", ">= 2.0.1"
+  
+  gem 'webrat'
+  gem 'database_cleaner'
+  gem 'cucumber-rails'
+  gem 'cucumber'
+  gem 'launchy'    # So you can do Then show me the page
 end
