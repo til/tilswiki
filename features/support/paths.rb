@@ -11,11 +11,16 @@ module NavigationHelpers
     when /the home\s?page/
       '/'
 
+    when /that page/
+      "/#{@page.handle}"
+
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
     #   when /^(.*)'s profile page$/i
     #     user_profile_path(User.find_by_login($1))
+
+      
 
     else
       begin
