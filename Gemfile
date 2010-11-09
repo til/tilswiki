@@ -57,7 +57,7 @@ end
 group :development, :test do
   gem "rspec-rails", ">= 2.0.1"
   
-  gem 'webrat'
+  gem 'capybara'
   gem 'database_cleaner'
   gem 'cucumber-rails'
   gem 'cucumber'
