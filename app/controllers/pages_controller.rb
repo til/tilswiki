@@ -63,8 +63,7 @@ class PagesController < ApplicationController
 protected
   def redirect_from_old_handle
     OldHandle.first(:name => params[:id]).andand do |old_handle|
-      redirect "/" / old_handle.page.handle, :permanent => true
-      throw :halt
+      redirect_to page_path(old_handle.page), :status => :moved_permanently
     end
   end
 end
