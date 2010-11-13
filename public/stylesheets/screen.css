@@ -134,6 +134,8 @@ h2 {
       margin-right: 3px; }
     #panel_edit .progress .unsaved {
       color: darkred; }
+    #panel_edit .progress .error {
+      color: red; }
   #panel_edit a {
     border: 3px solid #fbfaf4; }
     #panel_edit a:hover, #panel_edit a.active {

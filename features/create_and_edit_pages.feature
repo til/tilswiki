@@ -18,9 +18,17 @@ Feature: Create and edit pages
 
     Given there is a page
     When I go to that page
+
     And I add the text "foobar"
     Then I should see "changed"
     When I wait a few seconds
     Then I should not see "changed"
     But I should see "All changes saved"
-    And the page should have the text "foobar" at the end
+    And the page should have the text "foobar"
+
+    When I add the text "bazbazbaz"
+    Then I should see "changed"
+    When I wait a few seconds
+    Then I should not see "changed"
+    But I should see "All changes saved"
+    And the page should have the text "bazbazbaz"

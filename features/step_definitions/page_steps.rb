@@ -13,7 +13,16 @@ When /^I wait a few seconds$/ do
   sleep 3
 end
 
-Then /^the page should have the text "([^"]*)" at the end$/ do |text| #"
-  @page.reload
-  @page.body.should include(text)
+Then /^the page should (not )?have the text "([^"]*)"$/ do |should_not, text| #"
+  body = Page.get(@page.id).body
+  if should_not
+    body.should_not include(text)
+  else
+    body.should include(text)
+  end
+end
+
+When /^someone else updates it$/ do
+  @page.body += "From someone else"
+  @page.save
 end

@@ -13,7 +13,7 @@
   = render :partial => 'panel_edit'
   = render :partial => 'panel_history'
 
-#wysiwyg{:contenteditable => "true"}
+#wysiwyg{:contenteditable => "true", "data-version_number" => @page.latest_version.number }
   != @page.body
 
 #imageUpload

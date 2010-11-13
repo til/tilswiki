@@ -9,6 +9,7 @@ var $tw = function() {
     var successCallback = function(data, textStatus) {
       // Only run the callback when no other ajax call has been started later
       if ($('.progress').data('allowedSuccessCallback') === successCallback) {
+        wysiwyg.data('version_number', data.version_number);
         tw.progressSaved();
       }
     };
@@ -21,9 +22,16 @@ var $tw = function() {
 
     $.ajax({
              url:     '/' + document.location.toString().split('/').pop(),
-             data:    { "page[body]" : wysiwyg.html() },
+             data:    { "page[version_number]" : wysiwyg.data('version_number'),
+                        "page[body]"           : wysiwyg.html() },
              type:    'PUT',
-             'success': successCallback
+             'success': successCallback,
+             'error'  : function(xhr) {
+               $(".progress").html("<span class='error'>Save failed</span>");
+               if (xhr.status == 409) {
+                 alert("Save failed, someone else is editing this too. Reload the page then try again.\n\nSorry, but this is better than overwriting each other's changes.");
+               }
+             }
            });
   };
 

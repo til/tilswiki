@@ -44,11 +44,16 @@ class PagesController < ApplicationController
       end
       return
     end
+    
+    if params[:page][:version_number].to_i != @page.latest_version.number
+      render :text => "Conflict", :status => 409
+      return
+    end
 
     @page.body = params[:page][:body]
     @page.save
 
-    render :text => "Updated"
+    render :json => { :version_number => @page.latest_version.number }
   end
   
   def insert_link
