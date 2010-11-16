@@ -5,7 +5,7 @@
 
 #wysiwyg.ui-corner-all{:contenteditable => "true", "data-version_number" => @page.latest_version.number }
   != @page.body
-
+  .clear
 
 #panel.ui-corner-all.ui-widget-content
   = render :partial => 'panel_edit'
@@ -37,5 +37,3 @@
     %p
       = f.submit 'OK'
       %a.cancel{:href=>"#"} Cancel
-
-

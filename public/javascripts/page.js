@@ -102,7 +102,7 @@ var $tw = function() {
 
   tw.imageUploadSuccess = function(data) {
     $(data).find('ul.assets li').each(function() {
-      $('#wysiwyg').append($(this).html()).append('<br/>');
+      $('#wysiwyg .clear').before($(this).html()).append('<br/>');
     });
 
     tb_remove(); // close thickbox
@@ -428,4 +428,20 @@ $(function() {
     switchToEditPanel();
     return false;
   });
+
+  $(window).resize(
+    function() {
+      if ($("body").width() > ($("#wysiwyg").outerWidth() + $("#panel").outerWidth())) {
+        // Body is wide enough for both wysiwyg and panel
+        $("#panel").css({ 
+                          position : "fixed",
+                          top : "0.25em",
+                          left : ($("#wysiwyg").outerWidth() + 10) + "px"
+                        });
+      } else {
+        // Body is too narrow
+        $("#panel").css({ position : "relative", top : 0, left : 0 });
+      }
+    }
+  ).resize();
 });
