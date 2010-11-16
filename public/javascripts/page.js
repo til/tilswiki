@@ -356,7 +356,7 @@ $(function() {
                          '<p class="detail">(' + versions[number-1]['created_at'] + ')</p>');
     if(number < versions.length) {
       current_version.append("<button class='ui-state-default ui-corner-all'"
-                             + " title='Revert page content to this version'>Revert</button>");
+                             + " title='Revert page content to this version'>Revert to<br />this version</button>");
       $('button', current_version)
         .hover(
           function() {
@@ -388,8 +388,10 @@ $(function() {
     $("#panel_history").hide();
   }
 
-  $('#panel .nav a[href=#panel_history]').click(function() {
+  $('a[href=#panel_history]').click(function() {
     $tw.suspendEditing();
+
+    $('#slider').hide();
 
     $.ajax({
       url      : document.location + '/versions',
@@ -398,6 +400,7 @@ $(function() {
         versions = data;
         $('img.progress').remove();
         $('#slider').
+          show().
           css('height', Math.max(Math.min(versions.length * 10, 500), 50) + 'px').
           slider({
           orientation : 'vertical',
@@ -415,17 +418,13 @@ $(function() {
       }
     });
 
-    $('#panel div').removeClass('current');
-    $(this).show().parent('div').addClass('current');
-
-    $("#panel_history").
-      append('<img class="progress" src="/images/ajax-loader.gif" />').
-      show();
+    $("#panel_history").show().
+      find("h2").after('<img class="progress" src="/images/ajax-loader.gif" />');
     $("#panel_edit").hide();
     return false;
   });
 
-  $('#panel .nav a[href=#panel_edit]').click(function() {
+  $('a[href=#panel_edit]').click(function() {
     switchToEditPanel();
     return false;
   });

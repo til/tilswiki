@@ -1,4 +1,6 @@
 #panel_edit
+  %h2 Edit
+
   %ul
     %li#panel_h1
       %a{ :href => "#", :title => "Make the current line a big heading" }
@@ -32,5 +34,7 @@
       %a.thickbox{:rel=>'nofollow', :href=> '/' + params[:id] + '/insert_link?TB_iframe=true&height=300&width=500', :title=>'Insert a Link'} Insert Link
     %li#panel_changeURL
       %a.thickbox{:href=>'#TB_inline?height=300&width=300&inlineId=changeURL', :title=>'Change the URL of this page'} Change URL
+    %li
+      %a{:href=>"#panel_history"} History
 
   %p.progress
