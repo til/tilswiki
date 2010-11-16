@@ -3,6 +3,10 @@
   %script{ :src => "/javascripts/pretty-date.js", :type => "text/javascript" }
   %script{ :src => "/javascripts/page.js", :type => "text/javascript" }
 
+#wysiwyg{:contenteditable => "true", "data-version_number" => @page.latest_version.number }
+  != @page.body
+
+
 #panel
   .nav
     %div.current
@@ -12,8 +16,6 @@
   = render :partial => 'panel_edit'
   = render :partial => 'panel_history'
 
-#wysiwyg{:contenteditable => "true", "data-version_number" => @page.latest_version.number }
-  != @page.body
 
 #imageUpload
   = form_tag page_assets_path(@page), :method => 'POST', :enctype => 'multipart/form-data' do
@@ -40,3 +42,5 @@
     %p
       = f.submit 'OK'
       %a.cancel{:href=>"#"} Cancel
+
+

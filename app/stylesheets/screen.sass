@@ -57,13 +57,26 @@ body
 
 
 #wysiwyg
+  float: left
   margin-top: 20px
   min-height: 600px
-  width: 700px
+  max-width: 700px
   background-color: white
   padding: 25px
   padding-top: 0
   border: 1px solid grey
+
+
+.clear
+  clear: both
+
+p.footer
+  font-size: 0.8em
+  color: grey
+
+  a
+    color: grey
+
 
 .dropTarget
   position: absolute
@@ -71,15 +84,6 @@ body
   height: 0
   width: 700px
   border-top: 5px dashed lightgrey
-
-
-.debugLine
-  position: fixed
-  height: 1px
-  width: 100%
-  background: red
-  margin: 0
-  padding: 0
 
 
 hr
@@ -103,11 +107,3 @@ hr
   em
     font-weight: bold
     font-style: normal
-
-
-p.footer
-  font-size: 0.8em
-  color: grey
-
-  a
-    color: grey

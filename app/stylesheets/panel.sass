@@ -1,8 +1,8 @@
 #panel
-  position: fixed
+  position: relative
+  float: left
   width: 120px
-  top: 20px
-  left: 800px
+  margin: 20px
   padding: 0 0 4px 4px
   line-height: 1em
 
@@ -33,7 +33,6 @@
   border: 1px dashed grey
   border-top: none
   background-color: #fbfaf4
-  position: absolute
   top: 25px
   width: 120px
 
@@ -127,10 +126,9 @@
 
   .progress
     position: absolute
-    bottom: 0px
-    left: 3px
-    width: 100%
-    margin: 0
+    bottom: 5px
+    padding: 0
+    margin: 3px
     font-size: small
     color: grey
 
@@ -170,12 +168,12 @@
       color: black
 
 #panel_history
-  min-height: 250px
+  min-height: 300px
   display: none
+  padding: 40px 0 10px 10px
 
   #slider
-    margin: 20px 10px 20px 10px
-
+    
   #current_version
     position: absolute
     padding-right: 5px

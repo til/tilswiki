@@ -1,8 +1,9 @@
 !!! Strict
 %html{ html_attrs("en_us") }
   %head
-    %meta{ :content => "text/html; charset=utf-8", "http-equiv" => "content-type" }/
-    %link{ :rel => "icon", :href => "/images/favicon.png", :type => "image/png" }/
+    %meta{ :content => "text/html; charset=utf-8", "http-equiv" => "content-type" }
+    %meta{ :name => "viewport", :content => "width=device-width" }
+    %link{ :rel => "icon", :href => "/images/favicon.png", :type => "image/png" }
 
     = stylesheet_link_tag "screen",                            :media => :screen
     = stylesheet_link_tag "/thickbox/thickbox",                :media => :screen
@@ -18,7 +19,10 @@
     = yield :head
 
   %body{:id=> yield(:page_id) || 'body'}
+
     = yield
+
+    .clear
 
     %p.footer
       Powered by:
